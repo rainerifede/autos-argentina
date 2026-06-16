@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fotos por modelo · SUV Argentina</title>
+<style>
+  :root{
+    --bg:#eef1f6; --card:#fff; --ink:#0f172a; --muted:#64748b; --soft:#94a3b8;
+    --line:#e2e8f0; --line2:#eef2f7; --green:#15a34a; --blue:#2563eb; --accent:#6d28d9;
+    --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px -12px rgba(15,23,42,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  a{color:inherit;text-decoration:none}
+  .hero{background:radial-gradient(1100px 380px at 82% -10%,#2b2160 0%,transparent 60%),linear-gradient(160deg,#0b1224,#15183a 70%,#0d1024);
+    color:#fff;padding:46px 0 32px;border-bottom:1px solid #0a0f1f}
+  .back{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#aeb9d2;margin-bottom:16px}
+  .back:hover{color:#fff}
+  h1{font-size:32px;font-weight:800;letter-spacing:-.025em;line-height:1.1}
+  h1 .hl{background:linear-gradient(90deg,#7dd3fc,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:#aeb9d2;font-size:15px;margin-top:11px;max-width:760px}
+  main{padding:34px 0 40px}
+  .model{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:20px;margin-bottom:22px}
+  .mhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line2)}
+  .mhead .brand{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .mhead .name{font-size:22px;font-weight:800;letter-spacing:-.01em}
+  .mhead .ver{font-size:13px;color:var(--slate,#475569);color:#475569}
+  .mhead .tag{margin-left:auto;font-size:11px;font-weight:800;padding:4px 11px;border-radius:999px;background:#dcfce7;color:#0f5132}
+  .mhead .tag.over{background:#fef3c7;color:#92400e}
+  .shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  figure{background:linear-gradient(160deg,#f3f6fa,#e6ecf4);border:1px solid var(--line2);border-radius:12px;overflow:hidden;cursor:zoom-in;transition:transform .14s,box-shadow .14s}
+  figure:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  figure img{width:100%;height:150px;object-fit:contain;display:block}
+  figcaption{font-size:11.5px;font-weight:700;color:var(--muted);text-align:center;padding:7px 6px;border-top:1px solid var(--line2);background:#fff}
+  .hint{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .hint b{color:var(--ink)}
+  /* lightbox */
+  #lb{position:fixed;inset:0;background:rgba(8,11,22,.92);display:none;align-items:center;justify-content:center;z-index:50;padding:30px;cursor:zoom-out}
+  #lb.open{display:flex}
+  #lb img{max-width:94vw;max-height:84vh;object-fit:contain;filter:drop-shadow(0 20px 40px rgba(0,0,0,.5))}
+  #lb .cap{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#dbe3f4;font-size:14px;font-weight:700}
+  #lb .x{position:absolute;top:18px;right:24px;color:#fff;font-size:30px;font-weight:300;cursor:pointer;line-height:1;opacity:.8}
+  #lb .x:hover{opacity:1}
+  footer{padding:8px 0 56px;color:var(--soft);font-size:12px}
+  @media(max-width:600px){h1{font-size:25px}.wrap{padding:0 14px}figure img{height:128px}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Volver al inicio</a>
+    <h1>Fotos <span class="hl">por modelo</span></h1>
+    <p class="lead">Seis vistas de cada modelo (frente, lateral, trasera y vista elevada), tomadas de los renders oficiales de fábrica. Tocá cualquier foto para ampliarla.</p>
+  </div>
+</div>
+
+<main class="wrap">
+  <p class="hint"><b>Tip:</b> hacé clic en una foto para verla en grande. Los colores son los de catálogo del render; el equipamiento real puede variar según versión.</p>
+  <div id="gallery"></div>
+</main>
+
+<footer class="wrap">Renders: imagin.studio · vistas 3/4, lateral, trasera y cenital · datos junio 2026.</footer>
+
+<div id="lb"><span class="x">&times;</span><img alt="Foto ampliada"><div class="cap"></div></div>
+
+<script>
+const BASE="https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30";
+const ANGLES=[
+  {a:"01", l:"Frontal 3/4"},
+  {a:"23", l:"Frontal (otro lado)"},
+  {a:"05", l:"Lateral"},
+  {a:"09", l:"Trasera 3/4"},
+  {a:"13", l:"Trasera"},
+  {a:"17", l:"Vista elevada"}
+];
+const MODELS=[
+  {brand:"Volkswagen", name:"Nivus", ver:"Highline 200 TSI", tag:"Recomendada", p:"&make=volkswagen&modelFamily=nivus&modelRange=nivus&modelYear=2025&trim=highline"},
+  {brand:"Volkswagen", name:"Tera", ver:"Outfit / High 170 TSI", tag:"En presupuesto", p:"&make=volkswagen&modelFamily=tera&modelRange=tera&modelYear=2026&trim=outfit"},
+  {brand:"Volkswagen", name:"T-Cross", ver:"Highline 200 TSI", tag:"Se pasa", tagOver:true, p:"&make=volkswagen&modelFamily=t-cross&modelRange=t-cross&modelYear=2025&trim=highline"},
+  {brand:"Kia", name:"K3 Cross", ver:"GT-Line", tag:"En presupuesto", p:"&make=kia&modelFamily=k3&modelVariant=ha&modelYear=2026"},
+  {brand:"Volkswagen", name:"Taos", ver:"Highline", tag:"Se pasa", tagOver:true, p:"&make=volkswagen&modelFamily=taos&modelRange=taos&modelYear=2026"},
+  {brand:"Toyota", name:"Corolla Cross", ver:"SEG / XEI", tag:"Se pasa", tagOver:true, p:"&make=toyota&modelFamily=corolla&modelRange=corolla-cross&modelYear=2025"},
+  {brand:"Jeep", name:"Compass", ver:"Limited Plus", tag:"Se pasa", tagOver:true, p:"&make=jeep&modelFamily=compass&modelRange=compass&modelYear=2023"},
+  {brand:"Fiat", name:"Fastback", ver:"Abarth Turbo 270", tag:"Se pasa", tagOver:true, p:"&make=fiat&modelFamily=fastback&modelRange=fastback&modelYear=2026"}
+];
+const imgUrl=(p,a,w)=>`${BASE}&width=${w}${p}&angle=${a}`;
+
+const gal=document.getElementById("gallery");
+MODELS.forEach(m=>{
+  const sec=document.createElement("div"); sec.className="model";
+  const shots=ANGLES.map(ang=>`
+    <figure data-full="${imgUrl(m.p,ang.a,1600)}" data-cap="${m.brand} ${m.name} · ${ang.l}">
+      <img src="${imgUrl(m.p,ang.a,600)}" alt="${m.brand} ${m.name} ${ang.l}" loading="lazy">
+      <figcaption>${ang.l}</figcaption>
+    </figure>`).join("");
+  sec.innerHTML=`
+    <div class="mhead">
+      <span class="brand">${m.brand}</span>
+      <span class="name">${m.name}</span>
+      <span class="ver">${m.ver}</span>
+      <span class="tag ${m.tagOver?'over':''}">${m.tag}</span>
+    </div>
+    <div class="shots">${shots}</div>`;
+  gal.appendChild(sec);
+});
+
+// Lightbox
+const lb=document.getElementById("lb"), lbImg=lb.querySelector("img"), lbCap=lb.querySelector(".cap");
+gal.addEventListener("click",e=>{
+  const fig=e.target.closest("figure"); if(!fig) return;
+  lbImg.src=fig.dataset.full; lbCap.textContent=fig.dataset.cap; lb.classList.add("open");
+});
+lb.addEventListener("click",()=>{lb.classList.remove("open"); lbImg.src="";});
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){lb.classList.remove("open"); lbImg.src="";} });
+</script>
+</body>
+</html>
