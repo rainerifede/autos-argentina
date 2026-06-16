@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nivus vs T-Cross vs K3 Cross · comparación simple</title>
+<style>
+  :root{
+    --bg:#eef1f6; --card:#fff; --ink:#0f172a; --muted:#64748b; --soft:#94a3b8;
+    --line:#e2e8f0; --line2:#eef2f7; --green:#15a34a; --greenbg:#dcfce7;
+    --red:#dc2626; --redbg:#fee2e2; --amber:#b45309; --amberbg:#fef3c7;
+    --blue:#2563eb; --shadow:0 1px 2px rgba(15,23,42,.06),0 10px 30px -14px rgba(15,23,42,.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+  .hero{background:radial-gradient(1100px 380px at 80% -10%,#27306a 0%,transparent 60%),linear-gradient(160deg,#0b1224,#141a3a 70%,#0d1024);
+    color:#fff;padding:42px 0 30px;border-bottom:1px solid #0a0f1f}
+  .back{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#aeb9d2;margin-bottom:15px;text-decoration:none}
+  .back:hover{color:#fff}
+  h1{font-size:31px;font-weight:800;letter-spacing:-.025em;line-height:1.12}
+  h1 .hl{background:linear-gradient(90deg,#7dd3fc,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:#aeb9d2;font-size:15px;margin-top:10px;max-width:720px}
+  .pill{display:inline-flex;align-items:center;gap:7px;margin-top:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    color:#dbe3f4;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px}
+  main{padding:30px 0 50px}
+  section{margin-bottom:30px}
+  h2{font-size:21px;font-weight:800;letter-spacing:-.01em;margin-bottom:5px;display:flex;align-items:center;gap:9px}
+  h2 .n{width:26px;height:26px;border-radius:8px;background:#0f172a;color:#fff;font-size:14px;display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:16px}
+  /* TLDR */
+  .tldr{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:22px 22px 8px}
+  .tldr .row{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line2)}
+  .tldr .row:last-of-type{border-bottom:none}
+  .tldr .tag{flex:0 0 auto;font-size:11.5px;font-weight:800;padding:5px 11px;border-radius:999px;white-space:nowrap;margin-top:2px}
+  .t-blue{background:#dbeafe;color:#1e40af}.t-dark{background:#e2e8f0;color:#0f172a}.t-red{background:var(--redbg);color:#991b1b}
+  .tldr .txt{font-size:14.5px}.tldr .txt b{font-weight:800}
+  .verdict{margin-top:6px;background:#0f172a;color:#fff;border-radius:14px;padding:16px 18px;font-size:14.5px;line-height:1.6}
+  .verdict b{color:#7dd3fc}
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .mc{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+  .mc .top{height:5px}.mc.nivus .top{background:#2563eb}.mc.tcross .top{background:#0f172a}.mc.k3 .top{background:#bb162b}
+  .mc .pic{background:linear-gradient(160deg,#f3f6fa,#e4eaf3);padding:6px 6px 0;text-align:center}
+  .mc .pic img{width:100%;height:130px;object-fit:contain}
+  .mc .body{padding:15px 16px 18px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .mc .brand{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .mc .name{font-size:18px;font-weight:800;line-height:1.15}
+  .mc .price{font-size:22px;font-weight:800;letter-spacing:-.02em}
+  .mc .price span{font-size:12.5px;font-weight:600;color:var(--muted);display:block;margin-top:1px}
+  .mc .who{font-size:13px;background:#f1f5f9;border-radius:9px;padding:8px 10px;color:#334155}
+  .mc .who b{color:var(--ink)}
+  .mc ul{list-style:none;font-size:13px;display:flex;flex-direction:column;gap:5px}
+  .mc li{display:flex;gap:7px;align-items:flex-start}
+  .mc li .i{flex:0 0 auto;font-weight:800;width:15px}
+  .mc li.good .i{color:var(--green)}.mc li.bad .i{color:var(--red)}
+  /* callout */
+  .callout{background:#fffdf5;border:1px solid #fde68a;border-left:5px solid #f59e0b;border-radius:14px;padding:16px 18px}
+  .callout h3{font-size:15.5px;margin-bottom:5px}
+  .callout p{font-size:14px;color:#3f3f46}
+  .callout b{color:#92400e}
+  /* table */
+  .tscroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);background:#fff}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+  th,td{padding:11px 13px;text-align:left;border-bottom:1px solid var(--line2)}
+  thead th{background:#0f172a;color:#fff;font-size:12.5px;position:sticky;top:0}
+  thead th:first-child{border-top-left-radius:0}
+  tbody th{font-weight:600;color:#334155;width:34%}
+  td{text-align:center;font-weight:600}
+  td:first-child{text-align:left}
+  .grp td{background:#f1f5f9;font-weight:800;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#475569;text-align:left}
+  .si{color:var(--green)}.no{color:var(--soft)}
+  .best{background:#ecfdf5}
+  .cell-note{display:block;font-size:11px;font-weight:600;color:var(--muted)}
+  /* guide */
+  .guide{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .gc{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+  .gc .q{font-size:13.5px;color:#334155;min-height:54px}
+  .gc .a{margin-top:10px;padding-top:11px;border-top:1px solid var(--line2);font-size:15px;font-weight:800}
+  .gc .a small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-top:2px}
+  .legend{font-size:12.5px;color:var(--muted);margin-top:10px;line-height:1.7}
+  .legend b{color:var(--ink)}
+  footer{padding:6px 0 50px;color:var(--soft);font-size:12px;line-height:1.7}
+  footer b{color:var(--muted)}
+  @media(max-width:780px){.cards{grid-template-columns:1fr}.guide{grid-template-columns:1fr}h1{font-size:25px}.wrap{padding:0 14px}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <a class="back" href="index.html">← Volver al inicio</a>
+    <h1>Nivus <span class="hl">vs</span> T-Cross <span class="hl">vs</span> K3 Cross</h1>
+    <p class="lead">Las tres comparadas en simple, sin tecnicismos: qué trae cada una, cuánto sale y cuál conviene según lo que busques.</p>
+    <span class="pill">Dólar blue venta $1.460 · 15/06/2026 · equipamiento de fuentes oficiales</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- TLDR -->
+  <section>
+    <h2>En una frase cada una</h2>
+    <div class="tldr">
+      <div class="row"><span class="tag t-blue">Nivus Highline</span><span class="txt">La <b>más barata</b> y casi tan equipada como la T-Cross. Misma seguridad, anda igual de bien. <b>Pero no tiene techo de vidrio</b> y es la más justa de espacio atrás.</span></div>
+      <div class="row"><span class="tag t-dark">T-Cross Highline</span><span class="txt">La <b>más espaciosa y completa</b>: techo panorámico, estacionamiento automático y el mejor puntaje de choque. <b>Es la más cara</b> y se pasa del presupuesto.</span></div>
+      <div class="row"><span class="tag t-red">K3 Cross GT-Line</span><span class="txt">La <b>más equipada por el precio</b>: techo solar, climatizador de 2 zonas, asientos calefaccionados y <b>5 años de garantía</b>. Su motor es común (sin turbo) y la marca tiene menos red.</span></div>
+      <div class="verdict">Resumen honesto: si el <b>presupuesto manda</b>, la <b>Nivus Highline</b> es la compra más inteligente (tenés casi todo por bastante menos). Si querés el <b>auto más grande y completo</b> y podés estirarte, la <b>T-Cross</b>. Si buscás el <b>más lleno de equipo y la garantía más larga</b>, la <b>K3 Cross</b>.</div>
+    </div>
+  </section>
+
+  <!-- CARDS -->
+  <section>
+    <h2>Las tres de un vistazo</h2>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <!-- TECHO -->
+  <section>
+    <div class="callout">
+      <h3>La duda del techo (importante)</h3>
+      <p>El <b>Nivus no tiene techo de vidrio en ninguna versión</b>, ni siquiera la Outfit. Lo que cambia la Outfit es que pinta el techo de <b>negro</b> y suma detalles deportivos, pero <b>no es un techo que se abra ni panorámico</b>. Los que sí tienen techo de verdad son la <b>T-Cross</b> (panorámico, grande) y la <b>K3 Cross</b> (techo solar). Si el techo es un "sí o sí" para vos, descartá el Nivus.</p>
+    </div>
+  </section>
+
+  <!-- TABLA -->
+  <section>
+    <h2>Comparación punto por punto</h2>
+    <p class="sub">Verde = lo tiene / es lo mejor del grupo. Gris = no lo tiene.</p>
+    <div class="tscroll">
+      <table>
+        <thead>
+          <tr><th>Qué mirar</th><th>Nivus Highline</th><th>T-Cross Highline</th><th>K3 Cross GT-Line</th></tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><td colspan="4">Plata</td></tr>
+          <tr><td>Precio en dólares</td><td class="best">USD 26.199</td><td>USD 30.651</td><td>USD 28.500</td></tr>
+          <tr><td>Precio en pesos (aprox.)</td><td class="best">$38,3 M</td><td>$44,8 M</td><td>$41,6 M</td></tr>
+          <tr><td>¿Entra en USD 29.000?</td><td class="best"><span class="si">Sí</span></td><td><span class="no">No</span><span class="cell-note">se pasa ~USD 1.650</span></td><td><span class="si">Sí</span></td></tr>
+
+          <tr class="grp"><td colspan="4">Seguridad (lo que más importa)</td></tr>
+          <tr><td>Airbags</td><td>6</td><td>6</td><td>6</td></tr>
+          <tr><td>Estrellas Latin NCAP</td><td>5★<span class="cell-note">test 2022</span></td><td class="best">5★<span class="cell-note">test 2024 (más exigente)</span></td><td>5★</td></tr>
+          <tr><td>Aviso de punto ciego</td><td><span class="si">Sí</span></td><td><span class="si">Sí</span></td><td><span class="si">Sí</span></td></tr>
+          <tr><td>Frenado automático de emergencia</td><td><span class="si">Sí</span></td><td><span class="si">Sí</span><span class="cell-note">detecta peatones</span></td><td><span class="si">Sí</span></td></tr>
+          <tr><td>Mantenimiento de carril</td><td><span class="si">Sí</span></td><td><span class="si">Sí</span></td><td><span class="si">Sí</span></td></tr>
+          <tr><td>Crucero adaptativo<span class="cell-note">mantiene la distancia solo</span></td><td><span class="si">Sí</span></td><td><span class="si">Sí</span></td><td><span class="no">No</span><span class="cell-note">crucero común</span></td></tr>
+          <tr><td>Estaciona solo (Park Assist)</td><td><span class="no">No</span></td><td class="best"><span class="si">Sí</span></td><td><span class="no">No</span></td></tr>
+
+          <tr class="grp"><td colspan="4">Comodidad y equipo</td></tr>
+          <tr><td>Techo de vidrio</td><td><span class="no">No</span></td><td class="best"><span class="si">Sí, panorámico</span></td><td><span class="si">Sí, solar</span></td></tr>
+          <tr><td>Pantalla central</td><td>10"</td><td>10,25"</td><td>10,25"</td></tr>
+          <tr><td>Climatizador</td><td>1 zona</td><td>1 zona</td><td class="best">2 zonas</td></tr>
+          <tr><td>Asientos calefaccionados</td><td><span class="no">No</span></td><td><span class="no">No</span></td><td class="best"><span class="si">Sí</span></td></tr>
+          <tr><td>Llantas de 17"</td><td><span class="si">Sí</span></td><td><span class="si">Sí</span></td><td><span class="si">Sí</span></td></tr>
+
+          <tr class="grp"><td colspan="4">Tamaño y espacio</td></tr>
+          <tr><td>Tipo de carrocería</td><td>SUV coupé<span class="cell-note">más bajo, deportivo</span></td><td class="best">SUV alto<span class="cell-note">postura camioneta</span></td><td>Crossover<span class="cell-note">hatch alto</span></td></tr>
+          <tr><td>Lugar atrás</td><td>El más justo</td><td class="best">El mejor</td><td>Muy bueno</td></tr>
+          <tr><td>Baúl</td><td class="best">415 L</td><td>hasta 420 L</td><td>390 L</td></tr>
+
+          <tr class="grp"><td colspan="4">Mecánica y manejo</td></tr>
+          <tr><td>Motor</td><td>1.0 turbo<span class="cell-note">116 cv</span></td><td>1.0 turbo<span class="cell-note">116 cv</span></td><td>1.6 sin turbo<span class="cell-note">121 cv</span></td></tr>
+          <tr><td>Envión (torque)</td><td class="best">200 Nm</td><td class="best">200 Nm</td><td>151 Nm<span class="cell-note">pide más vueltas</span></td></tr>
+          <tr><td>Caja</td><td>Automática</td><td>Automática</td><td>Automática</td></tr>
+
+          <tr class="grp"><td colspan="4">Respaldo</td></tr>
+          <tr><td>Garantía</td><td>3 años</td><td>3 años</td><td class="best">5 años / 100.000 km</td></tr>
+          <tr><td>Red de service y reventa</td><td class="best">Muy amplia</td><td class="best">Muy amplia</td><td>Buena<span class="cell-note">marca en crecimiento</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="legend"><b>¿Qué significan?</b> · <b>Punto ciego:</b> te avisa con una luz en el espejo si viene un auto al lado cuando vas a cambiar de carril. · <b>Frenado automático:</b> el auto frena solo si detecta un choque inminente. · <b>Mantenimiento de carril:</b> corrige el volante si te salís de tu carril sin querer. · <b>Crucero adaptativo:</b> mantiene solo la velocidad y la distancia con el de adelante. · <b>Latin NCAP:</b> el examen de choque independiente; las tres sacaron el máximo (5★).</p>
+  </section>
+
+  <!-- GUIA -->
+  <section>
+    <h2>¿Cuál te conviene?</h2>
+    <p class="sub">Elegí la frase que más te representa.</p>
+    <div class="guide">
+      <div class="gc">
+        <div class="q">"Quiero gastar lo menos posible, pero que sea seguro y moderno."</div>
+        <div class="a">VW Nivus Highline<small>Casi todo lo de la T-Cross por ~USD 4.450 menos.</small></div>
+      </div>
+      <div class="gc">
+        <div class="q">"Quiero el más espacioso, con techo panorámico y la mejor seguridad. Puedo estirar el presupuesto."</div>
+        <div class="a">VW T-Cross Highline<small>La más SUV y completa, pero la más cara.</small></div>
+      </div>
+      <div class="gc">
+        <div class="q">"Quiero el más lleno de equipo por el precio y la garantía más larga."</div>
+        <div class="a">Kia K3 Cross GT-Line<small>Techo, bizona, asientos con calor y 5 años. Motor sin turbo.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VEREDICTO -->
+  <section>
+    <h2>La verdad, sin vueltas</h2>
+    <div class="tldr">
+      <p style="font-size:14.5px;padding:6px 0 14px">En <b>seguridad las tres están parejas</b>: 6 airbags, 5 estrellas y los avisos clave (punto ciego y frenado automático). Ahí <b>ninguna le "gana" claramente a la otra</b>; la T-Cross suma algún extra (estaciona sola, choque más nuevo) y la K3 es la única sin crucero adaptativo.</p>
+      <p style="font-size:14.5px;padding:0 0 14px;border-top:1px solid var(--line2);padding-top:14px">Entonces la decisión no pasa por seguridad, pasa por <b>plata, techo y espacio</b>: la <b>Nivus</b> gana en precio, la <b>T-Cross</b> en espacio + techo + equipo de fábrica, y la <b>K3</b> en equipamiento por el precio + garantía. La Nivus y la T-Cross andan igual (mismo motor turbo); la K3 anda bien pero su motor común necesita más vueltas para el mismo envión.</p>
+      <div class="verdict"><b>Mi elección:</b> si el límite de USD 29.000 es firme, me quedo con la <b>Nivus Highline</b> (lo más auto por la plata). Si pueden estirarse y valoran espacio y techo, la <b>T-Cross</b> lo vale. La <b>K3</b> es la apuesta más "equipada y con garantía", ideal si no te molesta una marca más nueva y un motor sin turbo.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  Equipamiento: flyers oficiales VW MY26 (Nivus, T-Cross) y ficha oficial Kia / Autocosmos (K3 Cross GT-Line). Precios: lista de concesionaria / elcerokm, convertidos al dólar blue venta $1.460 (dolarhoy, 15/06/2026). Los precios son referenciales y cambian seguido. Imágenes ilustrativas (renders imagin.studio).
+</footer>
+
+<script>
+const BASE="https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=600&angle=01";
+const CARS=[
+  {cls:"nivus", brand:"Volkswagen", name:"Nivus Highline", price:"USD 26.199", ars:"≈ $38,3 M · Outfit (look negro): USD 27.405",
+   who:"<b>Para quién:</b> el que quiere gastar menos sin resignar seguridad ni tecnología.",
+   img:"&make=volkswagen&modelFamily=nivus&modelRange=nivus&modelYear=2025&trim=highline",
+   good:["La más barata de las tres","Misma seguridad que la T-Cross (6 airbags, punto ciego, frenado auto)","Motor turbo con buen envión + baúl grande (415 L)"],
+   bad:["No tiene techo de vidrio","Es la más justa de espacio atrás"]},
+  {cls:"tcross", brand:"Volkswagen", name:"T-Cross Highline", price:"USD 30.651", ars:"≈ $44,8 M · se pasa del presupuesto",
+   who:"<b>Para quién:</b> el que prioriza espacio, techo y la máxima seguridad.",
+   img:"&make=volkswagen&modelFamily=t-cross&modelRange=t-cross&modelYear=2025&trim=highline",
+   good:["La más espaciosa y alta (postura SUV)","Techo panorámico y estaciona sola","Choque más nuevo (Latin NCAP 5★ test 2024)"],
+   bad:["La más cara: se va de USD 29.000","Mismo motor que la Nivus pero pagás más"]},
+  {cls:"k3", brand:"Kia", name:"K3 Cross GT-Line", price:"USD 28.500", ars:"≈ $41,6 M",
+   who:"<b>Para quién:</b> el que quiere el auto más equipado por la plata y tranquilidad de garantía.",
+   img:"&make=kia&modelFamily=k3&modelVariant=ha&modelYear=2026",
+   good:["Techo solar, climatizador 2 zonas y asientos con calefacción","5 años / 100.000 km de garantía","Buen lugar atrás (batalla larga) y 5★ Latin NCAP"],
+   bad:["Motor 1.6 sin turbo: pide más vueltas","Marca con menos red/reventa y sin crucero adaptativo"]}
+];
+const wrap=document.getElementById("cards");
+CARS.forEach(c=>{
+  const good=c.good.map(g=>`<li class="good"><span class="i">✓</span><span>${g}</span></li>`).join("");
+  const bad=c.bad.map(b=>`<li class="bad"><span class="i">✗</span><span>${b}</span></li>`).join("");
+  const el=document.createElement("div"); el.className="mc "+c.cls;
+  el.innerHTML=`
+    <div class="top"></div>
+    <div class="pic"><img src="${BASE}${c.img}" alt="${c.name}" loading="lazy"></div>
+    <div class="body">
+      <div>
+        <div class="brand">${c.brand}</div>
+        <div class="name">${c.name}</div>
+      </div>
+      <div class="price">${c.price}<span>${c.ars}</span></div>
+      <div class="who">${c.who}</div>
+      <ul>${good}${bad}</ul>
+    </div>`;
+  wrap.appendChild(el);
+});
+</script>
+</body>
+</html>
