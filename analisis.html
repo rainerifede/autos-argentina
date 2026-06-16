@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sin la Tracker · ¿cuál elegir? · Nivus vs Tera vs T-Cross vs K3 Cross</title>
+<style>
+  :root{
+    --bg:#eef1f6; --card:#fff; --ink:#0f172a; --muted:#64748b; --soft:#94a3b8;
+    --line:#e2e8f0; --line2:#eef2f7;
+    --green:#15a34a; --greenbg:#dcfce7; --greenln:#bbf7d0;
+    --amber:#d97706; --amberbg:#fef3c7; --amberln:#fde68a;
+    --red:#dc2626; --redbg:#fee2e2; --redln:#fecaca;
+    --slate:#475569; --slatebg:#f1f5f9;
+    --blue:#2563eb; --bluebg:#dbeafe;
+    --accent:#6d28d9; --gold:#b45309; --goldbg:#fffbeb;
+    --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px -12px rgba(15,23,42,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  .hero{background:radial-gradient(1100px 380px at 82% -10%,#2b2160 0%,transparent 60%),linear-gradient(160deg,#0b1224,#15183a 70%,#0d1024);
+    color:#fff;padding:48px 0 34px;border-bottom:1px solid #0a0f1f}
+  .badge-top{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;color:#d6c9ff;background:rgba(124,92,255,.14);border:1px solid rgba(124,92,255,.3);
+    padding:6px 12px;border-radius:999px;margin-bottom:16px}
+  .badge-top::before{content:"";width:7px;height:7px;border-radius:50%;background:#a78bfa;box-shadow:0 0 10px #a78bfa}
+  h1{font-size:34px;font-weight:800;letter-spacing:-.025em;line-height:1.1;max-width:860px}
+  h1 .hl{background:linear-gradient(90deg,#7dd3fc,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:#aeb9d2;font-size:15.5px;margin-top:12px;max-width:800px}
+  .verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:26px}
+  .vc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 17px}
+  .vc .t{font-size:11.5px;color:#9fb0cf;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+  .vc .m{font-size:18px;font-weight:800;margin-top:6px;letter-spacing:-.01em}
+  .vc .p{font-size:13px;color:#aeb9d2;margin-top:3px}
+  .vc .u{font-size:13px;color:#7dd3fc;font-weight:700;margin-top:6px}
+  .vc.win{background:linear-gradient(135deg,rgba(21,163,74,.24),rgba(21,163,74,.06));border-color:rgba(34,197,94,.45)}
+  .vc.full{background:linear-gradient(135deg,rgba(37,99,235,.22),rgba(37,99,235,.05));border-color:rgba(59,130,246,.45)}
+  .vc.over{background:linear-gradient(135deg,rgba(217,119,6,.22),rgba(217,119,6,.05));border-color:rgba(245,158,11,.45)}
+  .vc.over .u{color:#fbbf24}
+
+  section{padding:36px 0 6px}
+  .shead{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .shead .num{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .shead h2{font-size:21px;font-weight:800;letter-spacing:-.02em}
+  .shead p{font-size:13.5px;color:var(--muted)}
+  .sban{height:4px;border-radius:99px;margin:14px 0 20px}
+
+  .tldr{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);border-radius:14px;
+    padding:18px 20px;box-shadow:var(--shadow);margin-top:6px}
+  .tldr h3{font-size:16px;font-weight:800;margin-bottom:8px}
+  .tldr p{font-size:14px;color:var(--slate);margin-bottom:8px;line-height:1.6}
+  .tldr p:last-child{margin-bottom:0}
+  .tldr b{color:var(--ink)}
+
+  /* DUELS */
+  .duels{display:flex;flex-direction:column;gap:20px}
+  .duel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  .dhead{display:grid;grid-template-columns:128px 1fr 1fr;background:#f8fafc;border-bottom:1px solid var(--line)}
+  .dhead .lbl{padding:13px 14px;font-weight:800;font-size:11px;color:var(--soft);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center}
+  .dhead .nm{padding:12px 14px;font-weight:800;font-size:14.5px;border-left:1px solid var(--line2);line-height:1.2}
+  .dhead .nm small{display:block;font-weight:700;font-size:12px;color:var(--blue);margin-top:3px}
+  .dhead .nm small.over{color:var(--amber)}
+  .drow{display:grid;grid-template-columns:128px 1fr 1fr;border-bottom:1px solid var(--line2)}
+  .drow:last-of-type{border-bottom:none}
+  .dk{padding:11px 14px;font-size:11.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;display:flex;align-items:center;background:#fcfdfe}
+  .dcell{padding:11px 14px;font-size:13px;color:var(--slate);border-left:1px solid var(--line2);display:flex;align-items:center;gap:7px;line-height:1.35}
+  .dcell.win{background:var(--greenbg);color:#0f5132;font-weight:600}
+  .dcell.win::before{content:"✓";font-weight:900;color:var(--green);flex-shrink:0}
+  .dcell.tie{color:var(--soft)}
+  .dverdict{padding:14px 16px;font-size:13.5px;line-height:1.55;background:var(--goldbg);color:#854d0e;border-top:1px solid var(--amberln)}
+  .dverdict b{color:#7c2d12}
+
+  /* SCORE TABLE */
+  .tablewrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:840px}
+  thead th{background:#f8fafc;text-align:center;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--muted);padding:11px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
+  thead th.l{text-align:left}
+  tbody td{padding:10px 8px;border-bottom:1px solid var(--line2);text-align:center;vertical-align:middle}
+  tbody td.l{text-align:left}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.top{background:linear-gradient(90deg,rgba(21,163,74,.07),transparent 70%)}
+  tbody tr:hover{background:#f8fafc}
+  .tmodel{font-weight:800;white-space:nowrap}
+  .tmodel small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+  .tusd{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tusd.over{color:var(--red)}
+  .tusd .se{display:block;font-size:9.5px;font-weight:700;color:var(--red)}
+  .stars{letter-spacing:1px;font-size:13px;white-space:nowrap}
+  .stars .f{color:#f59e0b} .stars .e{color:#dbe1ea}
+  .tot{font-weight:800;font-variant-numeric:tabular-nums}
+  .ybadge{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px}
+  .ybadge.y{background:var(--greenbg);color:#0f5132} .ybadge.n{background:var(--slatebg);color:var(--soft)}
+  .legend{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}
+  .legend b{color:var(--slate)}
+
+  /* CRITERIA */
+  .crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
+  .ccard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .ccard h4{font-size:15px;font-weight:800;display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .ccard h4 .e{font-size:18px}
+  .ccard p{font-size:13.5px;color:var(--slate);line-height:1.55}
+  .ccard p b{color:var(--ink)}
+
+  /* MODEL CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+  .mcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .mcard.over{border-color:var(--amberln)}
+  .mtop{display:flex;gap:14px;padding:15px 16px 0}
+  .mtop .ph{width:120px;height:78px;flex-shrink:0;background:linear-gradient(160deg,#f3f6fa,#e6ecf4);border-radius:10px;display:flex;align-items:center;justify-content:center}
+  .mtop .ph img{width:96%;height:96%;object-fit:contain}
+  .mhead .rk{font-size:11px;font-weight:800;color:var(--green)}
+  .mhead .rk.over{color:var(--amber)}
+  .mhead .model{font-size:17px;font-weight:800;line-height:1.1}
+  .mhead .ver{font-size:12px;color:var(--slate);margin-top:2px}
+  .mhead .usd{font-size:15px;font-weight:800;margin-top:5px}
+  .mspec{display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px 0}
+  .mspec span{font-size:11.5px;font-weight:600;color:var(--slate);background:var(--slatebg);border-radius:7px;padding:4px 9px}
+  .mbody{padding:13px 16px 16px;display:flex;flex-direction:column;gap:10px}
+  .pc{display:flex;flex-direction:column;gap:5px}
+  .pc .row{display:flex;gap:8px;font-size:12.8px;line-height:1.4}
+  .pc .ic{flex-shrink:0;width:16px;height:16px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;margin-top:1px}
+  .pc .ic.p{background:var(--green)} .pc .ic.c{background:var(--red)}
+  .pc .row span:last-child{color:var(--slate)}
+  .mverdict{font-size:13px;line-height:1.5;background:var(--goldbg);border:1px solid var(--amberln);border-radius:10px;padding:10px 12px;color:#854d0e}
+  .mverdict b{color:#7c2d12}
+  .note{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .note h4{font-size:14.5px;font-weight:800;margin-bottom:6px}
+  .note p{font-size:13.5px;color:var(--slate);line-height:1.55}
+  .note b{color:var(--ink)}
+
+  /* GUIDE */
+  .guide{display:flex;flex-direction:column;gap:10px}
+  .grow{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;box-shadow:var(--shadow)}
+  .grow .if{flex:1;font-size:14px;color:var(--slate)}
+  .grow .if b{color:var(--ink)}
+  .grow .then{flex-shrink:0;text-align:right}
+  .grow .then .pick{font-weight:800;font-size:14.5px}
+  .grow .then .pu{font-size:12px;color:var(--muted)}
+  .grow .arrow{color:var(--soft);font-weight:800}
+
+  footer{margin-top:36px;padding:26px 0 60px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+  footer h3{font-size:13px;color:var(--ink);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+  footer p{margin-bottom:9px;max-width:980px;line-height:1.6}
+  footer a{color:var(--blue);text-decoration:none}
+  @media(max-width:640px){h1{font-size:26px}.wrap{padding:0 14px}.grid,.crit{grid-template-columns:1fr}
+    .dhead,.drow{grid-template-columns:96px 1fr 1fr}.dk,.dhead .lbl{font-size:10px;padding:9px}
+    .grow{flex-direction:column;align-items:flex-start}.grow .then{text-align:left}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="badge-top">Análisis sin Chevrolet Tracker · honesto · 16 jun 2026</div>
+    <h1>Sacando la Tracker, <span class="hl">¿cuál te conviene?</span></h1>
+    <p class="lead">Quedan en carrera la <b style="color:#fff">VW Nivus</b>, la <b style="color:#fff">VW Tera</b>, la <b style="color:#fff">VW T-Cross</b> y la <b style="color:#fff">Kia K3 Cross</b>. Sin la Chevrolet (que era nacional y la del mejor motor), todas son importadas y la pelea se reduce a una pregunta: <b style="color:#fff">¿motor turbo y mejor precio, o techo panorámico?</b> Acá las enfrento mano a mano.</p>
+
+    <div class="verdict">
+      <div class="vc win">
+        <div class="t">La más recomendable</div>
+        <div class="m">VW Nivus Highline</div>
+        <div class="p">El mejor equilibrio: motor turbo con buen empuje, baúl grande, marca con red y reventa, y la más barata. No tiene techo panorámico.</div>
+        <div class="u">USD 26.199 · en presupuesto</div>
+      </div>
+      <div class="vc full">
+        <div class="t">El techo, dentro del tope</div>
+        <div class="m">Kia K3 Cross GT-Line</div>
+        <div class="p">La única que entra en presupuesto y trae techo panorámico. Suma precio fijo en dólares y 5 años de garantía. A cambio: motor aspirado y formato compacto.</div>
+        <div class="u">USD 28.650 · en presupuesto</div>
+      </div>
+      <div class="vc over">
+        <div class="t">El mejor auto, si estirás</div>
+        <div class="m">VW T-Cross Highline</div>
+        <div class="p">La más completa y espaciosa, con techo panorámico y el mismo motor que la Nivus. El pero: se pasa del presupuesto.</div>
+        <div class="u">USD 30.651 · +USD 1.650</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section style="padding-top:28px">
+    <div class="tldr">
+      <h3>El veredicto en 20 segundos</h3>
+      <p>Si respetás el tope de USD 29.000 y querés el mejor auto por la plata: <b>VW Nivus Highline</b>. Tiene el mejor motor del grupo en presupuesto (1.0 turbo, 116 CV / 200 Nm), baúl grande, buena reventa y es la más barata de todas. Su única falta frente a tu lista de deseos es el <b>techo panorámico</b>, que no ofrece.</p>
+      <p>Si ese techo es para vos imprescindible y no querés pasarte del tope, la única opción es la <b>Kia K3 Cross GT-Line</b>: lo trae, cotiza en dólares (no sube con el blue) y suma 5 años de garantía. El costo: es un <b>crossover compacto</b> con motor <b>1.6 aspirado</b> (menos empuje) y red/reventa más chicas.</p>
+      <p>Si el techo te importa pero priorizás que sea <b>buen auto</b> y podés estirar ~USD 1.650, la <b>VW T-Cross Highline</b> es superior al K3 (motor turbo, más espacio, más red), aunque se sale del presupuesto. La <b>Tera</b> queda relegada: es la más nueva en diseño, pero la más chica y la de menor motor, por casi la misma plata que la Nivus.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--blue)">VS</div><div><h2>Mano a mano: por qué una sobre la otra</h2><p>Los cuatro cruces que de verdad definen tu decisión. En verde, quién gana cada punto.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--blue),var(--bluebg))"></div>
+    <div class="duels" id="duels"></div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num">≡</div><div><h2>Tabla de puntajes</h2><p>Cada una de 1 a 5 en los 7 criterios que pesan. Es una guía: leé los cruces de arriba y los motivos de abajo.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,#cbd5e1,transparent)"></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th class="l">Modelo</th><th>USD</th>
+          <th>Motor</th><th>Espacio</th><th>Equipo</th><th>Origen</th><th>Reventa</th><th>Posventa</th><th>Valor</th>
+          <th>Techo</th><th>Puntaje</th>
+        </tr></thead>
+        <tbody id="scorebody"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <b>Cómo califico:</b> <b>Motor</b> = potencia y empuje reales · <b>Espacio</b> = habitabilidad y baúl · <b>Equipo</b> = lo que suma por encima de lo pedido · <b>Origen</b> = disponibilidad/repuestos (todas importadas aquí) · <b>Reventa</b> = liquidez en Argentina · <b>Posventa</b> = red + garantía · <b>Valor</b> = cuánto auto por la plata. El techo panorámico es un extra deseable, va aparte. En <span style="color:var(--red);font-weight:700">rojo</span>, las que se pasan del tope de USD 29.000.
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--accent)">7</div><div><h2>Los criterios, sin vueltas</h2><p>Qué cambia de verdad entre ellas.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--accent),#ddd6fe)"></div>
+    <div class="crit">
+      <div class="ccard"><h4><span class="e">⚙️</span> Motor y andar</h4><p><b>Nivus y T-Cross</b> comparten el <b>1.0 turbo (116 CV / 200 Nm)</b>: el más vivo del grupo, sobre todo en ruta y subidas. La <b>Tera</b> usa el mismo bloque pero afinado a <b>101 CV / 170 Nm</b>: alcanza, pero es la más justa. El <b>K3 Cross</b> trae un <b>1.6 aspirado</b>: anda bien en ciudad, pero sin el empuje de un turbo cuando lo exigís.</p></div>
+      <div class="ccard"><h4><span class="e">📦</span> Espacio y habitabilidad</h4><p>La <b>T-Cross</b> es la más práctica: SUV-B alta, con <b>asiento trasero corredizo</b> y buen baúl. La <b>Nivus</b> tiene baúl grande (~415 l) pero el techo coupé recorta algo de cabeza atrás. La <b>Tera</b> es la más chica (4,15 m, 350 l). El <b>K3 Cross</b> es un crossover compacto, más bajo y con menos vocación SUV.</p></div>
+      <div class="ccard"><h4><span class="e">🌅</span> Techo panorámico (lo deseable)</h4><p>Solo lo ofrecen la <b>T-Cross</b> (Highline/Extreme) y el <b>K3 Cross GT-Line</b>. <b>Nivus y Tera no lo tienen</b> en ninguna versión. De las que entran en presupuesto, <b>el K3 es la única con techo</b>.</p></div>
+      <div class="ccard"><h4><span class="e">💸</span> Precio y moneda</h4><p>La <b>Nivus Highline</b> es la más barata (USD 26.199). El <b>K3</b> cotiza <b>directo en dólares</b>: no se mueve con el blue, una ventaja si esperás que el dólar suba. La <b>T-Cross</b> es la más cara y <b>se pasa del tope</b>. La <b>Tera</b> pide casi lo mismo que la Nivus por menos auto.</p></div>
+      <div class="ccard"><h4><span class="e">🔧</span> Posventa, garantía y reventa</h4><p><b>VW</b> tiene red enorme y buena reventa (la Nivus y T-Cross, modelos consolidados; la Tera es nueva y su reventa está por verse). <b>Kia</b> tiene red más chica y reventa más floja, pero compensa con <b>garantía de 5 años</b> (VW, 3 años).</p></div>
+      <div class="ccard"><h4><span class="e">🎨</span> Versiones Outfit / Extreme</h4><p>Las <b>Outfit</b> (Nivus y Tera) y la <b>Extreme</b> (T-Cross) suman estética (llantas oscurecidas, detalles negros, tren deportivo) sobre la Highline/High, <b>sin cambiar motor ni lo esencial</b>. Para tus requisitos, la versión base de cada una ya alcanza; las top se pagan por imagen.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--green)">★</div><div><h2>Una por una: lo bueno y lo malo</h2><p>Pros y contras honestos, en orden de recomendación.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--green),var(--greenln))"></div>
+    <div class="grid" id="models"></div>
+    <div class="note" style="margin-top:18px">
+      <h4>¿Y las versiones Outfit y Extreme?</h4>
+      <p>La <b>Nivus Outfit</b> (USD 27.405), la <b>Tera Outfit</b> (USD 27.329) y la <b>T-Cross Extreme</b> (USD 31.336) suman llantas oscurecidas, detalles en negro y, en la Extreme, terminación deportiva, pero <b>mantienen el mismo motor y la misma base</b> que la Highline/High. Para lo que pediste (punto ciego + 17") no agregan nada funcional: pagás USD 250-700 más por estética. Si te gusta el look, adelante; si buscás valor, la versión base rinde igual.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--ink)">→</div><div><h2>Guía rápida: cuál comprar según tu caso</h2><p>Elegí la fila que más se parezca a vos.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,#0f172a,#cbd5e1)"></div>
+    <div class="guide">
+      <div class="grow"><div class="if">Querés el <b>mejor auto por la plata</b> dentro del tope y el techo no es prioridad.</div><div class="arrow">→</div><div class="then"><div class="pick">VW Nivus Highline</div><div class="pu">USD 26.199</div></div></div>
+      <div class="grow"><div class="if">El <b>techo panorámico es imprescindible</b> y no querés pasarte del presupuesto.</div><div class="arrow">→</div><div class="then"><div class="pick">Kia K3 Cross GT-Line</div><div class="pu">USD 28.650</div></div></div>
+      <div class="grow"><div class="if">Querés techo + <b>el mejor auto</b> (motor, espacio, marca) y podés <b>estirar ~USD 1.650</b>.</div><div class="arrow">→</div><div class="then"><div class="pick">VW T-Cross Highline</div><div class="pu">USD 30.651 · se pasa</div></div></div>
+      <div class="grow"><div class="if">Te importa <b>esperar que el dólar suba</b>: querés precio fijo en USD y garantía larga.</div><div class="arrow">→</div><div class="then"><div class="pick">Kia K3 Cross GT-Line</div><div class="pu">USD 28.650</div></div></div>
+      <div class="grow"><div class="if">Buscás el <b>diseño VW más nuevo</b> en formato compacto y no te importa el menor motor.</div><div class="arrow">→</div><div class="then"><div class="pick">VW Tera High</div><div class="pu">USD 27.055</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="padding:0">
+      <h3>Cómo armé este análisis (y qué es opinión)</h3>
+      <p><b>Datos duros:</b> precios de <a href="https://elcerokm.com" target="_blank">elcerokm.com</a> (junio 2026) al dólar blue venta <b>$1.460</b>; equipamiento de las <b>fichas técnicas oficiales</b> (flyers VW MY26). El Kia K3 Cross cotiza directamente en dólares (US$ 28.650), por eso no depende del tipo de cambio.</p>
+      <p><b>Lo que es juicio mío:</b> los puntajes, los cruces mano a mano y el orden de recomendación son una valoración basada en specs, segmento y mercado argentino (reventa, red, importación). No es patrocinado ni una verdad absoluta: quien priorice diseño o el techo panorámico puede ordenar distinto.</p>
+      <p style="color:var(--soft)">Sacaste la Tracker de la lista, así que este análisis se concentra en VW (Nivus, Tera, T-Cross) y Kia (K3 Cross). El "mejor precio" de elcerokm puede requerir contado o financiación; confirmá precio final, disponibilidad y equipamiento exacto de la unidad en el concesionario.</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const RATE=1460;
+const cars=[
+  {erank:"La más recomendable", over:false, brand:"Volkswagen", model:"Nivus", ver:"Highline · 1.0 turbo 116 CV AT6", img:"nivus",
+   usd:26199, ars:38250000, origin:"Importada (Brasil)", pano:false,
+   spec:["1.0T · 116 CV · 200 Nm","Baúl ~415 l","En presupuesto"],
+   s:{motor:4,espacio:4,equip:4,origen:3,reventa:4,posventa:4,valor:5},
+   pros:["El mejor motor del grupo en presupuesto (116 CV / 200 Nm)","Andar e interior VW, refinados","Baúl grande para el segmento (~415 l)","La más barata de todas (USD 26.199)","Marca con red enorme y buena reventa"],
+   cons:["Sin techo panorámico (no lo ofrece en ninguna versión)","Techo coupé: algo menos de cabeza en plazas traseras","Importada de Brasil"],
+   verdict:"La compra más sensata sin la Tracker. Cumple punto ciego + 17\", anda muy bien y es la más barata. Si el techo panorámico no es obligatorio, es esta."},
+
+  {erank:"El techo, dentro del tope", over:false, brand:"Kia", model:"K3 Cross", ver:"GT-Line · 1.6 aspirado AT", img:"k3",
+   usd:28650, ars:null, origin:"Importada (México) · cotiza en USD", pano:true,
+   spec:["1.6 aspirado · ~121 CV","Crossover compacto","Techo panorámico","Garantía 5 años"],
+   s:{motor:3,espacio:3,equip:4,origen:3,reventa:3,posventa:4,valor:3},
+   pros:["La única en presupuesto con techo panorámico","Precio en dólares: no se mueve con el blue","Garantía Kia larga (5 años)","Equipo GT-Line completo, con punto ciego + 17\""],
+   cons:["Motor 1.6 aspirado: menos empuje que los turbo","Es un crossover compacto, no una SUV plena","Red de posventa y reventa más chicas","Importado de México"],
+   verdict:"Tiene sentido si el techo panorámico es innegociable y no querés pasarte, o si querés precio fijo en dólares y garantía larga. Aceptás a cambio menos motor y menos tamaño."},
+
+  {erank:"El mejor auto, pero se pasa", over:true, brand:"Volkswagen", model:"T-Cross", ver:"Highline · 1.0 turbo 116 CV AT6", img:"tcross",
+   usd:30651, ars:44750000, origin:"Importada (Brasil)", pano:true,
+   spec:["1.0T · 116 CV · 200 Nm","Asiento trasero corredizo","Techo panorámico","Se pasa +USD 1.651"],
+   s:{motor:4,espacio:5,equip:5,origen:3,reventa:4,posventa:4,valor:3},
+   pros:["La más completa: punto ciego + 17\" + techo panorámico","Mismo motor turbo que la Nivus (116 CV / 200 Nm)","La más espaciosa y práctica: asiento trasero corredizo","Marca VW con red grande y buena reventa"],
+   cons:["Se pasa del tope: USD 30.651 (~USD 1.650 de más)","Es ~USD 4.450 más cara que la Nivus por más espacio y techo","Importada de Brasil"],
+   verdict:"Si el techo te importa y querés el mejor auto (motor + espacio + marca), supera al K3. El único pero es el precio: se sale del presupuesto. Vale la pena solo si podés y querés estirar."},
+
+  {erank:"La más nueva, pero la más justa", over:false, brand:"Volkswagen", model:"Tera", ver:"High · 1.0 turbo 101 CV AT6", img:"tera",
+   usd:27055, ars:39499999, origin:"Importada (Brasil)", pano:false,
+   spec:["1.0T · 101 CV · 170 Nm","SUV chica · 4,15 m · 350 l","En presupuesto"],
+   s:{motor:3,espacio:3,equip:3,origen:3,reventa:3,posventa:4,valor:3},
+   pros:["El diseño VW más nuevo y fresco","Punto ciego, crucero adaptativo y 17\"","Formato compacto, cómodo para ciudad"],
+   cons:["La menos potente del grupo (101 CV / 170 Nm)","La más chica (4,15 m, baúl 350 l)","Sin techo panorámico","Cuesta casi lo mismo que la Nivus, que da más auto"],
+   verdict:"Elegila por diseño nuevo y tamaño compacto. En relación tamaño/motor/precio, la Nivus Highline la supera por casi la misma plata."}
+];
+// Variantes (solo para la tabla de puntajes)
+const variants=[
+  {brand:"Volkswagen", model:"Nivus", ver:"Outfit", over:false, usd:27405, ars:40010952, pano:false, s:{motor:4,espacio:4,equip:4,origen:3,reventa:4,posventa:4,valor:4}},
+  {brand:"Volkswagen", model:"Tera", ver:"Outfit", over:false, usd:27329, ars:39900000, pano:false, s:{motor:3,espacio:3,equip:4,origen:3,reventa:3,posventa:4,valor:3}},
+  {brand:"Volkswagen", model:"T-Cross", ver:"Extreme", over:true, usd:31336, ars:45750000, pano:true, s:{motor:4,espacio:5,equip:5,origen:3,reventa:4,posventa:4,valor:3}}
+];
+
+const IMG={
+  nivus:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=nivus&modelRange=nivus&modelYear=2025&trim=highline&angle=01",
+  tera:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=tera&modelRange=tera&modelYear=2026&trim=outfit&angle=01",
+  k3:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=kia&modelFamily=k3&modelVariant=ha&modelYear=2026&angle=01",
+  tcross:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=t-cross&modelRange=t-cross&modelYear=2025&trim=highline&angle=01"
+};
+const fmtArs=n=>"$"+n.toLocaleString("es-AR");
+const fmtUsd=n=>"USD "+n.toLocaleString("es-AR");
+const totOf=c=>Object.values(c.s).reduce((a,b)=>a+b,0);
+const stars=n=>{let h="";for(let i=1;i<=5;i++)h+=`<span class="${i<=n?'f':'e'}">●</span>`;return `<span class="stars">${h}</span>`;};
+
+// DUELS
+const duels=[
+  {a:{nm:"VW Nivus Highline",u:"USD 26.199"}, b:{nm:"VW Tera High",u:"USD 27.055"},
+   rows:[
+     {k:"Precio", a:"USD 26.199 · más barata", b:"USD 27.055", w:"a"},
+     {k:"Motor", a:"1.0T · 116 CV · 200 Nm", b:"1.0T · 101 CV · 170 Nm", w:"a"},
+     {k:"Espacio", a:"Más larga (4,27 m) · baúl ~415 l", b:"Más chica (4,15 m) · 350 l", w:"a"},
+     {k:"Diseño", a:"Coupé, modelo consolidado", b:"El VW más nuevo", w:"b"},
+     {k:"Reventa", a:"Probada", b:"Modelo nuevo, a confirmar", w:"a"}
+   ],
+   verdict:"La Nivus Highline gana casi todo: más barata, más motor, más espacio y reventa probada. Elegí la Tera solo si te enamora su diseño nuevo o querés el formato más chico para ciudad."},
+
+  {a:{nm:"VW Nivus Highline",u:"USD 26.199"}, b:{nm:"Kia K3 Cross GT-Line",u:"USD 28.650"},
+   rows:[
+     {k:"Precio hoy", a:"USD 26.199 · más barata", b:"USD 28.650", w:"a"},
+     {k:"Moneda", a:"En pesos: sube si sube el blue", b:"Cotiza en dólares: precio fijo", w:"b"},
+     {k:"Motor", a:"1.0 turbo · 200 Nm", b:"1.6 aspirado · sin turbo", w:"a"},
+     {k:"Techo panor.", a:"No lo ofrece", b:"Sí, panorámico", w:"b"},
+     {k:"Garantía", a:"3 años (VW)", b:"5 años (Kia)", w:"b"},
+     {k:"Formato", a:"SUV-coupé, más alta", b:"Crossover compacto, más bajo", w:"a"},
+     {k:"Red / reventa", a:"Red VW grande, buena reventa", b:"Red Kia chica, reventa floja", w:"a"}
+   ],
+   verdict:"El cruce clave. La Nivus es mejor en lo mecánico, el espacio y la red; el K3 gana en techo panorámico, precio fijo en dólares y garantía. Es 'mejor andar' contra 'más confort y precio estable'."},
+
+  {a:{nm:"VW Nivus Highline",u:"USD 26.199"}, b:{nm:"VW T-Cross Highline",u:"USD 30.651 · se pasa", over:true},
+   rows:[
+     {k:"Precio", a:"USD 26.199 · en presupuesto", b:"USD 30.651 · +1.650 sobre el tope", w:"a"},
+     {k:"Motor", a:"1.0T · 116 CV · 200 Nm", b:"1.0T · 116 CV · 200 Nm", w:"tie"},
+     {k:"Espacio", a:"Baúl grande, pero techo coupé", b:"Más alta y amplia · asiento corredizo", w:"b"},
+     {k:"Techo panor.", a:"No", b:"Sí", w:"b"},
+     {k:"Estilo", a:"Deportivo, coupé", b:"SUV clásica, más sobria", w:"tie"}
+   ],
+   verdict:"Misma mecánica. La T-Cross suma practicidad y techo panorámico, pero cuesta ~USD 4.450 más y se pasa del tope. Si el presupuesto manda, Nivus; si querés espacio + techo y podés estirar, T-Cross."},
+
+  {a:{nm:"Kia K3 Cross GT-Line",u:"USD 28.650"}, b:{nm:"VW T-Cross Highline",u:"USD 30.651 · se pasa", over:true},
+   rows:[
+     {k:"Precio", a:"USD 28.650 · en presupuesto", b:"USD 30.651 · se pasa", w:"a"},
+     {k:"Motor", a:"1.6 aspirado", b:"1.0 turbo · 200 Nm", w:"b"},
+     {k:"Espacio", a:"Crossover compacto", b:"SUV-B amplia · asiento corredizo", w:"b"},
+     {k:"Techo panor.", a:"Sí", b:"Sí", w:"tie"},
+     {k:"Garantía", a:"5 años (Kia)", b:"3 años (VW)", w:"a"},
+     {k:"Red / reventa", a:"Red Kia más chica", b:"Red VW grande", w:"b"}
+   ],
+   verdict:"Las dos con techo panorámico. La T-Cross es mejor auto (motor turbo, más espacio, más red), pero se pasa del presupuesto. El K3 entra en el tope, cotiza en dólares y tiene 5 años de garantía, a cambio de ser más chico y aspirado."}
+];
+
+const duelsEl=document.getElementById("duels");
+function cell(text,w,which){ const cls = w===which?"win":(w==="tie"?"tie":""); return `<div class="dcell ${cls}">${text}</div>`; }
+duels.forEach(d=>{
+  const el=document.createElement("div"); el.className="duel";
+  const rows=d.rows.map(r=>`<div class="drow"><div class="dk">${r.k}</div>${cell(r.a,r.w,"a")}${cell(r.b,r.w,"b")}</div>`).join("");
+  el.innerHTML=`
+    <div class="dhead">
+      <div class="lbl">Mano a mano</div>
+      <div class="nm">${d.a.nm}<small class="${d.a.over?'over':''}">${d.a.u}</small></div>
+      <div class="nm">${d.b.nm}<small class="${d.b.over?'over':''}">${d.b.u}</small></div>
+    </div>
+    ${rows}
+    <div class="dverdict"><b>Veredicto:</b> ${d.verdict}</div>`;
+  duelsEl.appendChild(el);
+});
+
+// SCORE TABLE (main + variants, sorted by total desc, then price asc)
+const sb=document.getElementById("scorebody");
+const tableRows=[
+  ...cars.map(c=>({brand:c.brand,model:c.model,ver:c.ver.split(' · ')[0],usd:c.usd,over:c.over,pano:c.pano,s:c.s})),
+  ...variants.map(v=>({brand:v.brand,model:v.model,ver:v.ver,usd:v.usd,over:v.over,pano:v.pano,s:v.s}))
+];
+tableRows.sort((a,b)=>(totOf(b)-totOf(a))||(a.usd-b.usd));
+tableRows.forEach((c,i)=>{
+  const tr=document.createElement("tr"); if(!c.over && i<2) tr.className="top";
+  const usdCell = c.over
+    ? `<td class="tusd over">${c.usd.toLocaleString("es-AR")}<span class="se">se pasa</span></td>`
+    : `<td class="tusd">${c.usd.toLocaleString("es-AR")}</td>`;
+  tr.innerHTML=`
+    <td class="l"><div class="tmodel">${c.brand} ${c.model}<small>${c.ver}</small></div></td>
+    ${usdCell}
+    <td>${stars(c.s.motor)}</td><td>${stars(c.s.espacio)}</td><td>${stars(c.s.equip)}</td>
+    <td>${stars(c.s.origen)}</td><td>${stars(c.s.reventa)}</td><td>${stars(c.s.posventa)}</td><td>${stars(c.s.valor)}</td>
+    <td><span class="ybadge ${c.pano?'y':'n'}">${c.pano?'Sí':'No'}</span></td>
+    <td class="tot">${totOf(c)}<span style="color:var(--soft);font-weight:600">/35</span></td>`;
+  sb.appendChild(tr);
+});
+
+// MODEL CARDS
+const mc=document.getElementById("models");
+cars.forEach(c=>{
+  const el=document.createElement("div"); el.className="mcard"+(c.over?" over":"");
+  el.innerHTML=`
+    <div class="mtop">
+      <div class="ph"><img src="${IMG[c.img]}" alt="${c.brand} ${c.model}" loading="lazy"></div>
+      <div class="mhead">
+        <div class="rk ${c.over?'over':''}">${c.erank}</div>
+        <div class="model">${c.brand} ${c.model}</div>
+        <div class="ver">${c.ver}</div>
+        <div class="usd">${fmtUsd(c.usd)} <span style="font-weight:600;color:var(--muted);font-size:12px">· ${c.origin}</span></div>
+      </div>
+    </div>
+    <div class="mspec">${c.spec.map(s=>`<span>${s}</span>`).join("")}</div>
+    <div class="mbody">
+      <div class="pc">
+        ${c.pros.map(p=>`<div class="row"><span class="ic p">✓</span><span>${p}</span></div>`).join("")}
+        ${c.cons.map(p=>`<div class="row"><span class="ic c">✗</span><span>${p}</span></div>`).join("")}
+      </div>
+      <div class="mverdict"><b>Mi veredicto:</b> ${c.verdict}</div>
+    </div>`;
+  mc.appendChild(el);
+});
+</script>
+</body>
+</html>

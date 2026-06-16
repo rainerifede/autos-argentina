@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SUV Argentina · punto ciego + 17" · hasta USD 29.000 (precios elcerokm)</title>
+<style>
+  :root{
+    --bg:#eef1f6; --card:#ffffff; --ink:#0f172a; --muted:#64748b; --soft:#94a3b8;
+    --line:#e2e8f0; --line2:#eef2f7;
+    --green:#15a34a; --greenbg:#dcfce7; --greenln:#bbf7d0;
+    --amber:#d97706; --amberbg:#fef3c7; --amberln:#fde68a;
+    --red:#dc2626; --redbg:#fee2e2; --redln:#fecaca;
+    --slate:#475569; --slatebg:#f1f5f9;
+    --blue:#2563eb; --bluebg:#dbeafe;
+    --accent:#6d28d9;
+    --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px -12px rgba(15,23,42,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  /* HERO */
+  .hero{background:radial-gradient(1200px 400px at 80% -10%,#27306b 0%,transparent 60%),linear-gradient(160deg,#0b1224,#131d36 70%,#0d1730);
+    color:#fff;padding:46px 0 30px;border-bottom:1px solid #0a0f1f}
+  .badge-top{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.1em;
+    text-transform:uppercase;color:#c7b8ff;background:rgba(124,92,255,.14);border:1px solid rgba(124,92,255,.3);
+    padding:6px 12px;border-radius:999px;margin-bottom:16px}
+  .badge-top::before{content:"";width:7px;height:7px;border-radius:50%;background:#a78bfa;box-shadow:0 0 10px #a78bfa}
+  h1{font-size:34px;font-weight:800;letter-spacing:-.025em;line-height:1.1;max-width:820px}
+  h1 .hl{background:linear-gradient(90deg,#7dd3fc,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:#aab6cf;font-size:15.5px;margin-top:12px;max-width:760px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-top:26px}
+  .stat{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:15px 17px;backdrop-filter:blur(6px)}
+  .stat .l{font-size:11.5px;color:#93a1bd;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+  .stat .v{font-size:23px;font-weight:800;margin-top:5px;letter-spacing:-.01em}
+  .stat .v small{font-size:13px;color:#aab6cf;font-weight:600}
+  .stat.accent{background:linear-gradient(135deg,rgba(124,92,255,.22),rgba(56,189,248,.12));border-color:rgba(124,92,255,.4)}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+  .chip{font-size:12.5px;color:#dbe3f4;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+    padding:7px 13px;border-radius:999px}
+  .chip b{color:#fff}
+  .chip.opt{border-style:dashed;color:#aab6cf}
+
+  /* SECTIONS */
+  section{padding:34px 0 6px}
+  .shead{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .shead .num{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .shead h2{font-size:21px;font-weight:800;letter-spacing:-.02em}
+  .shead p{font-size:13.5px;color:var(--muted)}
+  .sban{height:4px;border-radius:99px;margin:14px 0 20px}
+
+  /* WINNERS */
+  .podium{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+  .pcard{background:var(--card);border:1px solid var(--greenln);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;position:relative;transition:transform .16s}
+  .pcard:hover{transform:translateY(-4px)}
+  .pcard .rank{position:absolute;top:14px;left:14px;z-index:2;background:var(--green);color:#fff;font-weight:800;font-size:12px;
+    padding:5px 11px;border-radius:999px;letter-spacing:.03em;box-shadow:0 4px 12px rgba(21,163,74,.4)}
+  .pcard .ph{height:172px;background:linear-gradient(160deg,#f0f4f9,#dfe7f1);display:flex;align-items:center;justify-content:center;position:relative}
+  .pcard .ph img{width:96%;height:96%;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(15,23,42,.22))}
+  .pbody{padding:16px 18px 18px;display:flex;flex-direction:column;gap:13px;flex:1}
+  .ptitle .brand{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .ptitle .model{font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+  .ptitle .ver{font-size:13px;color:var(--slate);margin-top:2px}
+  .pricerow{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:11px 14px;background:var(--greenbg);border-radius:12px}
+  .pricerow .usd{font-size:25px;font-weight:800;color:#0f5132;letter-spacing:-.02em}
+  .pricerow .ars{font-size:12.5px;color:#3f6b50;font-weight:600;text-align:right}
+  .feats{display:flex;flex-direction:column;gap:7px}
+  .feat{display:flex;align-items:center;gap:9px;font-size:13.5px}
+  .ic{width:19px;height:19px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff}
+  .ic.y{background:var(--green)} .ic.n{background:var(--red)} .ic.o{background:var(--blue)} .ic.g{background:var(--soft)}
+  .feat .ft{color:var(--slate)} .feat .ft b{color:var(--ink)}
+  .pnote{font-size:12.5px;color:var(--muted);background:var(--line2);border-radius:10px;padding:9px 12px;line-height:1.45}
+  .plink{font-size:12.5px;font-weight:700;color:var(--blue);text-decoration:none}
+  .plink:hover{text-decoration:underline}
+
+  /* TABLE */
+  .tablewrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  thead th{background:#f8fafc;text-align:left;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;
+    color:var(--muted);padding:12px 14px;border-bottom:2px solid var(--line);white-space:nowrap}
+  thead th.c,tbody td.c{text-align:center}
+  tbody td{padding:11px 14px;border-bottom:1px solid var(--line2);vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.win{background:linear-gradient(90deg,rgba(21,163,74,.07),transparent 60%)}
+  tbody tr.near{background:linear-gradient(90deg,rgba(217,119,6,.06),transparent 60%)}
+  tbody tr:hover{background:#f8fafc}
+  .tmodel{font-weight:700}
+  .tmodel small{display:block;color:var(--muted);font-weight:500;font-size:11.5px}
+  .tusd{font-weight:800;font-variant-numeric:tabular-nums}
+  .tars{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+  .dot{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12.5px}
+  .dot::before{content:"";width:9px;height:9px;border-radius:50%}
+  .dot.y{color:#15803d} .dot.y::before{background:var(--green)}
+  .dot.n{color:#b91c1c} .dot.n::before{background:var(--red)}
+  .pill{display:inline-block;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap}
+  .pill.win{background:var(--greenbg);color:#0f5132}
+  .pill.near{background:var(--amberbg);color:#92400e}
+  .pill.no{background:var(--redbg);color:#991b1b}
+  .pill.gray{background:var(--slatebg);color:var(--slate)}
+
+  /* FILTER + CARDS */
+  .filters{display:flex;flex-wrap:wrap;gap:9px;margin:8px 0 22px;position:sticky;top:0;z-index:9;
+    padding:14px 0;background:linear-gradient(180deg,var(--bg) 72%,transparent)}
+  .fbtn{background:var(--card);border:1px solid var(--line);color:var(--slate);padding:9px 15px;border-radius:10px;
+    font-size:13.5px;font-weight:700;cursor:pointer;transition:.14s;box-shadow:var(--shadow)}
+  .fbtn:hover{border-color:var(--accent);color:var(--ink)}
+  .fbtn.active{background:var(--ink);border-color:var(--ink);color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;transition:transform .16s,border-color .16s}
+  .card:hover{transform:translateY(-3px)}
+  .card .ph{height:150px;background:linear-gradient(160deg,#f3f6fa,#e6ecf4);display:flex;align-items:center;justify-content:center;position:relative}
+  .card .ph img{width:94%;height:94%;object-fit:contain;filter:drop-shadow(0 12px 14px rgba(15,23,42,.18))}
+  .card .tag{position:absolute;top:12px;right:12px;font-size:11px;font-weight:800;padding:5px 10px;border-radius:999px}
+  .cbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .cbrand{font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .cmodel{font-size:17px;font-weight:800;letter-spacing:-.01em;line-height:1.15}
+  .cver{font-size:12.5px;color:var(--slate);margin-top:2px}
+  .budget{margin-top:2px}
+  .budget .bl{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-bottom:5px;font-weight:600}
+  .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;position:relative}
+  .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:99px}
+  .bar .lim{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);opacity:.55}
+  .cfeats{display:flex;flex-wrap:wrap;gap:7px}
+  .tagf{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:8px;border:1px solid transparent}
+  .tagf.y{background:var(--greenbg);color:#0f5132;border-color:var(--greenln)}
+  .tagf.n{background:var(--redbg);color:#991b1b;border-color:var(--redln)}
+  .tagf.o{background:var(--bluebg);color:#1e40af}
+  .tagf.g{background:var(--slatebg);color:var(--slate)}
+  .creason{font-size:12.5px;color:var(--muted);line-height:1.45;border-left:3px solid var(--line);padding-left:10px}
+  .cfoot{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:4px}
+  .csrc{font-size:12px;font-weight:700;color:var(--blue);text-decoration:none}
+  .csrc:hover{text-decoration:underline}
+
+  /* VW BOX */
+  .vwbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:6px 6px 6px;box-shadow:var(--shadow);overflow:hidden}
+  .vwintro{padding:16px 18px 4px;font-size:14px;color:var(--slate)}
+  .vwintro b{color:var(--ink)}
+  .callout{display:flex;gap:12px;background:#fffbeb;border:1px solid var(--amberln);border-radius:12px;padding:13px 15px;margin:14px;font-size:13px;color:#854d0e;line-height:1.5}
+  .callout .ci{font-size:18px}
+
+  footer{margin-top:34px;padding:26px 0 60px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+  footer h3{font-size:13px;color:var(--ink);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+  footer p{margin-bottom:9px;max-width:980px;line-height:1.6}
+  footer a{color:var(--blue);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .hidden{display:none!important}
+  @media(max-width:600px){h1{font-size:26px}.wrap{padding:0 14px}.grid{grid-template-columns:1fr}
+    .tablewrap{overflow-x:auto}table{min-width:680px}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="badge-top">Precios elcerokm · equipamiento oficial VW/Chevrolet · 15 jun 2026</div>
+    <h1>SUV con <span class="hl">punto ciego y llantas de 17"</span> por hasta USD 29.000</h1>
+    <p class="lead">Precios reales de <b style="color:#fff">elcerokm.com</b> ("mejor precio" de concesionarios) al dólar blue, y equipamiento verificado <b style="color:#fff">versión por versión en las fichas oficiales de fábrica</b> (VW y Chevrolet). Las fichas de elcerokm tenían varios errores de equipamiento: al corregirlos con la fuente oficial, hay <b style="color:#fff">8 versiones 0km</b> que cumplen punto ciego + 17" y entran en presupuesto.</p>
+
+    <div class="stats">
+      <div class="stat accent">
+        <div class="l">Dólar usado (blue venta)</div>
+        <div class="v">$1.460 <small>/ USD</small></div>
+      </div>
+      <div class="stat">
+        <div class="l">Tope en pesos</div>
+        <div class="v">$42,34<small>M</small></div>
+      </div>
+      <div class="stat">
+        <div class="l">0km que cumplen y entran</div>
+        <div class="v">8 <small>versiones</small></div>
+      </div>
+      <div class="stat">
+        <div class="l">Fuente de precios</div>
+        <div class="v" style="font-size:17px">elcerokm.com<br><small>junio 2026</small></div>
+      </div>
+    </div>
+
+    <div class="chips">
+      <div class="chip">Llantas <b>≥ 17"</b> · obligatorio</div>
+      <div class="chip">Monitor de <b>punto ciego</b> · obligatorio</div>
+      <div class="chip opt">Techo <b>panorámico</b> · deseable</div>
+      <div class="chip">Precio <b>≤ USD 29.000</b></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--green)">✓</div><div><h2>Entran en presupuesto y cumplen todo</h2><p>Punto ciego + llantas de 17" o más, por menos de USD 29.000 (0km).</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--green),var(--greenln))"></div>
+    <div class="podium" id="podium"></div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num">≡</div><div><h2>Tabla comparativa completa</h2><p>Todos los modelos de tu lista, ordenados por precio en dólares. Verde = cumple y entra; ámbar = cumple pero se pasa; rojo = le falta algo.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,#cbd5e1,transparent)"></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th>Modelo / versión</th><th class="c">USD</th><th class="c">Precio ARS</th>
+          <th class="c">Punto ciego</th><th class="c">Llantas</th><th class="c">Techo panor.</th><th class="c">Veredicto</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--accent)">▦</div><div><h2>Todos los modelos en detalle</h2><p>Filtrá por categoría. Cada tarjeta muestra por qué entra o por qué queda afuera.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--accent),#ddd6fe)"></div>
+    <div class="filters" id="filters">
+      <button class="fbtn active" data-f="all">Todos</button>
+      <button class="fbtn" data-f="win">Entran y cumplen</button>
+      <button class="fbtn" data-f="near">Se pasan de precio</button>
+      <button class="fbtn" data-f="nofit">Les falta punto ciego o llanta</button>
+      <button class="fbtn" data-f="vw">Los 4 VW</button>
+    </div>
+    <div class="grid" id="cards"></div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:#1e3a8a">VW</div><div><h2>Tu pregunta puntual: Tera, T-Cross, Nivus y Taos</h2><p>Veredicto de cada uno con los precios reales de elcerokm.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,#1e3a8a,#bfdbfe)"></div>
+    <div class="vwbox">
+      <div class="vwintro">Con el equipamiento verificado en las <b>fichas oficiales de VW</b>, el panorama de los cuatro mejora mucho: <b>Nivus y Tera entran y cumplen</b>, mientras que <b>T-Cross y Taos cumplen todo pero se pasan de precio</b>. Versión por versión:</div>
+      <div class="tablewrap" style="box-shadow:none;border:none;margin:8px 14px 14px">
+        <table>
+          <thead><tr><th>Modelo</th><th>Mejor versión para vos</th><th class="c">USD</th><th>Qué pasa</th></tr></thead>
+          <tbody>
+            <tr class="win"><td class="tmodel">VW Nivus</td><td>Highline / Outfit 200 AT6</td><td class="c tusd">26.199</td><td>✅ <b>Entra y cumple</b>. La ficha oficial VW marca <b>llantas de 17"</b> (205/55) + punto ciego en Highline y Outfit. elcerokm la listaba con 16" por error. Sin techo panorámico.</td></tr>
+            <tr class="win"><td class="tmodel">VW Tera</td><td>High / Outfit AT6 170 TSI</td><td class="c tusd">27.055</td><td>✅ <b>Entra y cumple</b>. La ficha oficial VW confirma punto ciego + 17" ya en la <b>High</b> (USD 27.055); la Outfit suma estética por ~USD 270 más. Sin techo panorámico.</td></tr>
+            <tr class="near"><td class="tmodel">VW T-Cross</td><td>Highline / Extreme 200 AT6</td><td class="c tusd">30.651</td><td>⚠️ Cumple <b>todo</b> (punto ciego + 17" + techo panorámico, según ficha oficial VW) pero se pasa ~USD 1.650. elcerokm no le listaba el punto ciego.</td></tr>
+            <tr class="near"><td class="tmodel">VW Taos</td><td>Highline (AT6 Tipt)</td><td class="c tusd">33.219</td><td>⚠️ Cumple <b>todo</b> (punto ciego, 19" y techo panorámico) pero se pasa ~USD 4.200. La AT8 nueva sube a USD 35.600.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout"><span class="ci">⚠</span><div><b>Por qué no me fié de una sola fuente.</b> Las fichas por versión de elcerokm tenían errores de equipamiento: listaban la <b>Nivus con llantas de 16"</b> (la ficha oficial VW dice 17"), <b>no le daban punto ciego al T-Cross Highline ni a la Tera High</b> (las fichas oficiales VW sí lo confirman) y le asignaban punto ciego solo a la <b>Tracker Premier</b> cuando Chevrolet lo incluye desde la <b>LTZ</b>. Por eso el equipamiento de este informe sale de las <b>fichas técnicas oficiales de fábrica</b>, y los precios de elcerokm. Igual, antes de señar, confirmá el equipamiento de la unidad exacta (pedí foto del espejo: si tiene el testigo LED, trae punto ciego).</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="padding:0">
+      <h3>Metodología y fuentes</h3>
+      <p><b>Precios:</b> "mejor precio" publicado por <a href="https://elcerokm.com" target="_blank">elcerokm.com</a> (catálogo 0km, junio 2026), tomados versión por versión. <b>Equipamiento (punto ciego y llantas):</b> fichas técnicas oficiales de fábrica — flyers VW MY26 (Tera, Nivus, T-Cross, Taos) y datos oficiales de Chevrolet para la Tracker. <b>Fotos:</b> renders de imagin.studio.</p>
+      <p><b>Tipo de cambio:</b> dólar blue venta <b>$1.460</b> (Dolarhoy.com, 15/06/2026 18:13hs). Tope de presupuesto = USD 29.000 = $42.340.000. El Kia K3 Cross se publica directamente en dólares (US$ 28.650), así que no depende del tipo de cambio.</p>
+      <p><b>Por qué cambió respecto al informe anterior:</b> dos motivos. (1) <b>Precios:</b> antes usé precios de lista de Autocosmos muy inflados (p. ej. Taos Highline figuraba a USD 44.000 cuando en elcerokm el mejor precio es USD 33.000). (2) <b>Equipamiento:</b> las fichas de elcerokm tenían errores (Nivus con 16" en vez de 17", y sin punto ciego en T-Cross Highline, Tera High y Tracker LTZ), que corregí con las fichas oficiales de fábrica. Resultado: se pasó de 3 a 8 versiones 0km que cumplen y entran.</p>
+      <p style="color:var(--soft)">Aclaración: los precios de 0km cambian seguido y el "mejor precio" puede requerir financiación o condición de contado. Confirmá precio final y equipamiento de la unidad exacta en el concesionario antes de cerrar.</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const RATE = 1460, LIMIT = 29000;
+// ars: precio en pesos | usdNative: para autos cotizados en dólares (K3)
+const cars = [
+  // ---- GANADORES (punto ciego + 17" + <= USD 29.000) ----
+  {brand:"Chevrolet",model:"Tracker",ver:"LTZ · 1.2T 132cv AT6",origin:"Origen Argentina",img:"tracker",
+   ars:37900000,bsm:true,wheel:17,roof:"no",slug:"chevrolet/tracker/5p-1.2-t-6at-ltz-2026",
+   reason:"El 0km más barato que cumple. Sobre la LT suma punto ciego (Alerta de punto ciego), frenado autónomo de emergencia y llantas de aluminio de 17\". El techo panorámico recién llega en la Premier. Dato oficial Chevrolet."},
+  {brand:"Volkswagen",model:"Nivus",ver:"Highline 200 AT6 · 116cv",origin:"Origen Brasil",img:"nivus",
+   ars:38250000,bsm:true,wheel:17,roof:"no",slug:"volkswagen/nivus/5p-1.0-tsi-200-at6-highline-2025",
+   reason:"La ficha oficial VW (MY26) confirma llantas de aleación de 17\" (205/55) y detector de punto ciego con alerta de tráfico cruzado. Sin techo panorámico. (elcerokm la listaba con 16\" por error)."},
+  {brand:"Volkswagen",model:"Tera",ver:"High AT6 · 1.0T 101cv",origin:"Origen Brasil",img:"tera",
+   ars:39499999,bsm:true,wheel:17,roof:"no",slug:"volkswagen/tera/5p-high-at6-170-tsi",
+   reason:"La ficha oficial VW (MY26) marca punto ciego, control de crucero adaptativo, mantenimiento de carril y llantas de aleación de 17\". Sin techo panorámico. (elcerokm omitía el punto ciego en esta versión)."},
+  {brand:"Volkswagen",model:"Tera",ver:"Outfit AT6 · 1.0T 101cv",origin:"Origen Brasil",img:"tera",
+   ars:39900000,bsm:true,wheel:17,roof:"no",slug:"volkswagen/tera/5p-outfit-at6-170-tsi",
+   reason:"Misma dotación que la High pero con llantas de 17\" oscurecidas, techo bitono y detalles negro Outfit. También trae punto ciego. Sin techo panorámico."},
+  {brand:"Volkswagen",model:"Nivus",ver:"Outfit 200 AT6 · 116cv",origin:"Origen Brasil",img:"nivus",
+   ars:40010952,bsm:true,wheel:17,roof:"no",slug:"volkswagen/nivus/5p-1.0-tsi-200-at6-outfit-2025",
+   reason:"Tope de gama Nivus (base Highline): punto ciego + llantas de 17\" oscurecidas, según ficha oficial VW. Sin techo panorámico."},
+  {brand:"Chevrolet",model:"Tracker",ver:"RS · 1.2T 132cv AT6",origin:"Origen Argentina",img:"tracker",
+   ars:41500000,bsm:true,wheel:17,roof:"electrico",slug:"chevrolet/tracker/5p-1.2-t-6at-rs-2026",
+   reason:"Tope de gama: hereda de la Premier el punto ciego y el techo panorámico, y suma estética deportiva RS con llantas de aluminio de 17\". Dato oficial Chevrolet."},
+  {brand:"Kia",model:"K3 Cross",ver:"GT-Line · 1.6 121cv AT",origin:"Origen México · precio en USD",img:"k3",
+   usdNative:28650,bsm:true,wheel:17,roof:"electrico",slug:"kia/k3-cross/5p-gt-line-1.6-at",
+   reason:"Crossover compacto (no SUV plena). Trae punto ciego + techo panorámico eléctrico. Precio en dólares, no se mueve con el blue. Contra: motor 1.6 aspirado, justo de empuje."},
+  {brand:"Chevrolet",model:"Tracker",ver:"Premier · 1.2T 132cv AT6",origin:"Origen Argentina",img:"tracker",
+   ars:41900000,bsm:true,wheel:17,roof:"electrico",slug:"chevrolet/tracker/5p-1.2-t-6at-premier-2026",
+   reason:"La más completa que entra: sobre la LTZ suma techo solar panorámico, cargador inalámbrico y estacionamiento Easy Park, manteniendo punto ciego y 17\" oscurecidas. Dato oficial Chevrolet."},
+
+  // ---- CUMPLEN EQUIPAMIENTO PERO SE PASAN DE PRECIO ----
+  {brand:"Volkswagen",model:"T-Cross",ver:"Highline 200 AT6 · 116cv",origin:"Origen Brasil",img:"tcross",
+   ars:44750000,bsm:true,wheel:17,roof:"electrico",slug:"volkswagen/t-cross/5p-1.0-tsi-200-highline-at6-2025",
+   reason:"La ficha oficial VW confirma punto ciego, llantas de 17\" (205/55) y techo solar panorámico. Cumple todo, pero se pasa ~USD 1.650. (elcerokm no le listaba el punto ciego)."},
+  {brand:"Volkswagen",model:"T-Cross",ver:"Extreme 200 AT6 · 116cv",origin:"Origen Brasil",img:"tcross",
+   ars:45750000,bsm:true,wheel:17,roof:"electrico",slug:"volkswagen/t-cross/5p-1.0-tsi-200-extreme-at6-2025",
+   reason:"Igual que la Highline (punto ciego + 17\" + techo panorámico) con detalles deportivos y neumáticos Seal Inside, según ficha oficial VW. Se pasa ~USD 2.300."},
+  {brand:"Volkswagen",model:"Taos",ver:"Highline AT6 (Tipt) · 1.4T 150cv",origin:"Origen México · línea anterior",img:"taos",
+   ars:48500000,bsm:true,wheel:19,roof:"electrico",slug:"volkswagen/taos/5p-1.4-tsi-250-highline-tipt-2023",
+   reason:"Cumple todo de sobra: punto ciego, 19\" y techo panorámico. Es la Highline con caja AT6 (línea anterior, con descuento). Se pasa ~USD 4.200 del presupuesto."},
+  {brand:"Fiat",model:"Fastback",ver:"Abarth Turbo 270 AT6 · 175cv",origin:"Origen Brasil",img:"fastback",
+   ars:47718000,bsm:true,wheel:18,roof:"fijo",slug:"fiat/fastback/abarth-turbo-270-at6",
+   reason:"El punto ciego aparece solo en la Abarth (la Audace no lo trae). Techo panorámico fijo y 18\". Se pasa ~USD 3.700."},
+  {brand:"Volkswagen",model:"Taos",ver:"Highline AT8 · 1.4T 150cv",origin:"Origen México · caja nueva",img:"taos",
+   ars:51999999,bsm:true,wheel:19,roof:"electrico",slug:"volkswagen/taos/5p-1.4-tsi-250-highline-at8",
+   reason:"La Highline nueva con caja AT8 y techo panorámico eléctrico. Mejor andar, pero se va ~USD 6.600 del presupuesto."},
+  {brand:"Jeep",model:"Compass",ver:"Limited Plus 1.3T AT6 · 175cv",origin:"Origen Brasil",img:"compass",
+   ars:52990000,bsm:true,wheel:19,roof:"electrico",slug:"jeep/compass/5p-1.3-t-at6-limited-plus-4x2-2021",
+   reason:"ADAS completa con punto ciego, 19\" y techo panorámico. Mucho auto, pero bastante por encima del presupuesto en 0km."},
+  {brand:"Toyota",model:"Corolla Cross",ver:"SEG CVT · 2.0 171cv",origin:"Origen Brasil",img:"corolla",
+   ars:57000000,bsm:true,wheel:18,roof:"electrico",slug:"toyota/corolla-cross/5p-2.0-seg-cvt",
+   reason:"El punto ciego arranca en la SEG (la XEI no lo trae). Excelente reventa, pero muy caro en 0km."},
+
+  // ---- NO CUMPLEN EQUIPAMIENTO ----
+  {brand:"Chevrolet",model:"Tracker",ver:"LT · 1.2T 132cv AT6",origin:"Origen Argentina",img:"tracker",
+   ars:32900000,bsm:false,wheel:17,roof:"no",slug:"chevrolet/tracker/5p-1.2-t-6at-lt-2026",
+   reason:"La más barata de la gama y ya trae 17\" (de acero), pero NO tiene punto ciego: recién aparece en la LTZ, unos USD 3.400 más arriba."},
+  {brand:"Toyota",model:"Corolla Cross",ver:"XEI CVT · 2.0 170cv",origin:"Origen Brasil",img:"corolla",
+   ars:53000000,bsm:false,wheel:18,roof:"electrico",slug:"toyota/corolla-cross/5p-2.0-xei-cvt",
+   reason:"El punto ciego recién aparece en la SEG. La XEI no lo trae y, además, se va de presupuesto."}
+];
+
+const IMG = {
+  tera:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=tera&modelRange=tera&modelYear=2026&trim=outfit&angle=01",
+  tracker:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=chevrolet&modelFamily=tracker&modelRange=tracker&modelYear=2026&trim=premier&angle=01",
+  k3:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=kia&modelFamily=k3&modelVariant=ha&modelYear=2026&angle=01",
+  taos:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=taos&modelRange=taos&modelYear=2026&angle=01",
+  nivus:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=nivus&modelRange=nivus&modelYear=2025&trim=highline&angle=01",
+  tcross:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=t-cross&modelRange=t-cross&modelYear=2025&trim=highline&angle=01",
+  corolla:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=toyota&modelFamily=corolla&modelRange=corolla-cross&modelYear=2025&angle=01",
+  compass:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=jeep&modelFamily=compass&modelRange=compass&modelYear=2023&angle=01",
+  fastback:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=fiat&modelFamily=fastback&modelRange=fastback&modelYear=2026&angle=01"
+};
+const fmtAars = n => "$"+n.toLocaleString("es-AR");
+const usdOf = c => c.usdNative ? c.usdNative : Math.round(c.ars/RATE);
+const arsOf = c => c.usdNative ? c.usdNative*RATE : c.ars;
+const roofTxt = r => r==="electrico" ? "Techo panorámico" : r==="fijo" ? "Techo panor. fijo" : "Sin techo panor.";
+function fitOf(c){ const u=usdOf(c); const eq=c.bsm && c.wheel>=17;
+  if(eq && u<=LIMIT) return "win"; if(eq && u>LIMIT) return "near"; return "nofit"; }
+
+// PODIUM (winners)
+const podium = document.getElementById("podium");
+cars.filter(c=>fitOf(c)==="win").sort((a,b)=>usdOf(a)-usdOf(b)).forEach((c,i)=>{
+  const u=usdOf(c);
+  const el=document.createElement("div"); el.className="pcard";
+  el.innerHTML=`
+    <span class="rank">#${i+1} · entra</span>
+    <div class="ph"><img src="${IMG[c.img]}" alt="${c.brand} ${c.model}" loading="lazy"></div>
+    <div class="pbody">
+      <div class="ptitle"><div class="brand">${c.brand}</div><div class="model">${c.model}</div><div class="ver">${c.ver} · ${c.origin}</div></div>
+      <div class="pricerow"><div class="usd">USD ${u.toLocaleString("es-AR")}</div><div class="ars">${fmtAars(arsOf(c))}<br>blue $1.460</div></div>
+      <div class="feats">
+        <div class="feat"><span class="ic y">✓</span><span class="ft"><b>Punto ciego</b> incluido</span></div>
+        <div class="feat"><span class="ic y">✓</span><span class="ft">Llantas de <b>${c.wheel}"</b></span></div>
+        <div class="feat"><span class="ic ${c.roof==='no'?'g':'o'}">${c.roof==='no'?'–':'✓'}</span><span class="ft">${roofTxt(c.roof)}</span></div>
+      </div>
+      <div class="pnote">${c.reason}</div>
+      <a class="plink" href="https://elcerokm.com/${c.slug}" target="_blank">Ver ficha y precio en elcerokm →</a>
+    </div>`;
+  podium.appendChild(el);
+});
+
+// TABLE (all, sorted)
+const order={win:0,near:1,nofit:2};
+const tbody=document.getElementById("tbody");
+[...cars].sort((a,b)=> (order[fitOf(a)]-order[fitOf(b)]) || (usdOf(a)-usdOf(b))).forEach(c=>{
+  const u=usdOf(c), f=fitOf(c);
+  const verdict = f==="win" ? `<span class="pill win">Entra y cumple</span>`
+    : f==="near" ? `<span class="pill near">Se pasa +USD ${(u-LIMIT).toLocaleString("es-AR")}</span>`
+    : (!c.bsm ? `<span class="pill no">Sin punto ciego</span>` : `<span class="pill no">Llanta 16"</span>`);
+  const tr=document.createElement("tr"); tr.className=f;
+  tr.innerHTML=`
+    <td><div class="tmodel">${c.brand} ${c.model} <small>${c.ver}</small></div></td>
+    <td class="c tusd">${u.toLocaleString("es-AR")}</td>
+    <td class="c tars">${fmtAars(arsOf(c))}</td>
+    <td class="c"><span class="dot ${c.bsm?'y':'n'}">${c.bsm?'Sí':'No'}</span></td>
+    <td class="c"><span class="dot ${c.wheel>=17?'y':'n'}">${c.wheel}"</span></td>
+    <td class="c">${c.roof==='no'?'<span style="color:var(--soft)">—</span>':(c.roof==='fijo'?'Fijo':'Eléctrico')}</td>
+    <td class="c">${verdict}</td>`;
+  tbody.appendChild(tr);
+});
+
+// CARDS + FILTERS
+const cont=document.getElementById("cards");
+function tagFit(f){ return f==="win"?{t:"Entra y cumple",c:"var(--greenbg)",col:"#0f5132"}
+  : f==="near"?{t:"Se pasa de precio",c:"var(--amberbg)",col:"#92400e"}
+  : {t:"No cumple",c:"var(--redbg)",col:"#991b1b"}; }
+function render(filter){
+  cont.innerHTML="";
+  let list=[...cars];
+  if(filter==="vw") list=list.filter(c=>c.brand==="Volkswagen");
+  else if(filter!=="all") list=list.filter(c=>fitOf(c)===filter);
+  list.sort((a,b)=>(order[fitOf(a)]-order[fitOf(b)])||(usdOf(a)-usdOf(b)));
+  if(!list.length){ cont.innerHTML='<p style="color:var(--muted);padding:20px">Sin modelos en este filtro.</p>'; return; }
+  list.forEach(c=>{
+    const u=usdOf(c), f=fitOf(c), tg=tagFit(f);
+    const pct=Math.min(u/LIMIT,1)*100;
+    const over=u>LIMIT;
+    const barColor = f==="win"?"var(--green)":(over?"var(--red)":"var(--amber)");
+    const barW = over?100:pct;
+    const budgetTxt = over?`USD ${u.toLocaleString("es-AR")} · +${(u-LIMIT).toLocaleString("es-AR")} sobre el tope`:`USD ${u.toLocaleString("es-AR")} de 29.000`;
+    const el=document.createElement("div"); el.className="card";
+    el.innerHTML=`
+      <div class="ph"><img src="${IMG[c.img]}" alt="${c.brand} ${c.model}" loading="lazy">
+        <span class="tag" style="background:${tg.c};color:${tg.col}">${tg.t}</span></div>
+      <div class="cbody">
+        <div><div class="cbrand">${c.brand} · ${c.origin}</div><div class="cmodel">${c.model}</div><div class="cver">${c.ver}</div></div>
+        <div class="budget">
+          <div class="bl"><span>${budgetTxt}</span></div>
+          <div class="bar"><i style="width:${barW}%;background:${barColor}"></i><span class="lim" style="left:${Math.min(LIMIT/Math.max(u,LIMIT)*100,100)}%"></span></div>
+        </div>
+        <div class="cfeats">
+          <span class="tagf ${c.bsm?'y':'n'}">${c.bsm?'✓':'✗'} Punto ciego</span>
+          <span class="tagf ${c.wheel>=17?'y':'n'}">${c.wheel>=17?'✓':'✗'} Llantas ${c.wheel}"</span>
+          <span class="tagf ${c.roof==='no'?'g':'o'}">${c.roof==='no'?'– Sin techo':(c.roof==='fijo'?'✓ Techo fijo':'✓ Techo panor.')}</span>
+        </div>
+        <div class="creason">${c.reason}</div>
+        <div class="cfoot">
+          <span style="font-weight:800;font-size:15px">USD ${u.toLocaleString("es-AR")}</span>
+          <a class="csrc" href="https://elcerokm.com/${c.slug}" target="_blank">Ficha en elcerokm →</a>
+        </div>
+      </div>`;
+    cont.appendChild(el);
+  });
+}
+document.getElementById("filters").addEventListener("click",e=>{
+  if(!e.target.classList.contains("fbtn"))return;
+  document.querySelectorAll(".fbtn").forEach(b=>b.classList.remove("active"));
+  e.target.classList.add("active");
+  render(e.target.dataset.f);
+});
+render("all");
+</script>
+</body>
+</html>

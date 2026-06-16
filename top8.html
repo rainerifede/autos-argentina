@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>¿Cuál elegir? · Análisis honesto del Top 8 · SUV punto ciego + 17" ≤ USD 29.000</title>
+<style>
+  :root{
+    --bg:#eef1f6; --card:#fff; --ink:#0f172a; --muted:#64748b; --soft:#94a3b8;
+    --line:#e2e8f0; --line2:#eef2f7;
+    --green:#15a34a; --greenbg:#dcfce7; --greenln:#bbf7d0;
+    --amber:#d97706; --amberbg:#fef3c7; --amberln:#fde68a;
+    --red:#dc2626; --redbg:#fee2e2; --redln:#fecaca;
+    --slate:#475569; --slatebg:#f1f5f9;
+    --blue:#2563eb; --bluebg:#dbeafe;
+    --accent:#6d28d9; --gold:#b45309; --goldbg:#fffbeb;
+    --shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px -12px rgba(15,23,42,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  a{color:inherit}
+
+  .hero{background:radial-gradient(1100px 380px at 82% -10%,#2b2160 0%,transparent 60%),linear-gradient(160deg,#0b1224,#15183a 70%,#0d1024);
+    color:#fff;padding:48px 0 34px;border-bottom:1px solid #0a0f1f}
+  .badge-top{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;
+    text-transform:uppercase;color:#d6c9ff;background:rgba(124,92,255,.14);border:1px solid rgba(124,92,255,.3);
+    padding:6px 12px;border-radius:999px;margin-bottom:16px}
+  .badge-top::before{content:"";width:7px;height:7px;border-radius:50%;background:#a78bfa;box-shadow:0 0 10px #a78bfa}
+  h1{font-size:34px;font-weight:800;letter-spacing:-.025em;line-height:1.1;max-width:860px}
+  h1 .hl{background:linear-gradient(90deg,#7dd3fc,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:#aeb9d2;font-size:15.5px;margin-top:12px;max-width:780px}
+  .verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:26px}
+  .vc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 17px}
+  .vc .t{font-size:11.5px;color:#9fb0cf;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+  .vc .m{font-size:18px;font-weight:800;margin-top:6px;letter-spacing:-.01em}
+  .vc .p{font-size:13px;color:#aeb9d2;margin-top:3px}
+  .vc .u{font-size:13px;color:#7dd3fc;font-weight:700;margin-top:6px}
+  .vc.win{background:linear-gradient(135deg,rgba(21,163,74,.24),rgba(21,163,74,.06));border-color:rgba(34,197,94,.45)}
+  .vc.full{background:linear-gradient(135deg,rgba(124,92,255,.24),rgba(56,189,248,.1));border-color:rgba(124,92,255,.45)}
+  .vc.alt{background:linear-gradient(135deg,rgba(37,99,235,.22),rgba(37,99,235,.05));border-color:rgba(59,130,246,.45)}
+
+  section{padding:36px 0 6px}
+  .shead{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+  .shead .num{width:30px;height:30px;border-radius:9px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+  .shead h2{font-size:21px;font-weight:800;letter-spacing:-.02em}
+  .shead p{font-size:13.5px;color:var(--muted)}
+  .sban{height:4px;border-radius:99px;margin:14px 0 20px}
+
+  .tldr{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--green);border-radius:14px;
+    padding:18px 20px;box-shadow:var(--shadow);margin-top:6px}
+  .tldr h3{font-size:16px;font-weight:800;margin-bottom:8px}
+  .tldr p{font-size:14px;color:var(--slate);margin-bottom:8px;line-height:1.6}
+  .tldr b{color:var(--ink)}
+
+  /* RECOMMENDATION CARDS */
+  .recs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .rec{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative}
+  .rec.primary{border:2px solid var(--green)}
+  .rec .lab{position:absolute;top:14px;left:14px;z-index:2;font-weight:800;font-size:11.5px;padding:5px 11px;border-radius:999px;letter-spacing:.03em}
+  .rec.primary .lab{background:var(--green);color:#fff;box-shadow:0 4px 12px rgba(21,163,74,.4)}
+  .rec.full .lab{background:var(--accent);color:#fff}
+  .rec.alt .lab{background:var(--blue);color:#fff}
+  .rec .ph{height:168px;background:linear-gradient(160deg,#f0f4f9,#dfe7f1);display:flex;align-items:center;justify-content:center}
+  .rec .ph img{width:96%;height:96%;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(15,23,42,.22))}
+  .rbody{padding:16px 18px 18px;display:flex;flex-direction:column;gap:11px;flex:1}
+  .rbody .brand{font-size:11.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+  .rbody .model{font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+  .rbody .ver{font-size:12.5px;color:var(--slate);margin-top:2px}
+  .rprice{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:10px 13px;background:var(--slatebg);border-radius:11px}
+  .rprice .usd{font-size:23px;font-weight:800;letter-spacing:-.02em}
+  .rprice .ars{font-size:12px;color:var(--muted);font-weight:600;text-align:right}
+  .rwhy{font-size:13.5px;color:var(--slate);line-height:1.5}
+  .rwhy b{color:var(--ink)}
+
+  /* SCORE TABLE */
+  .tablewrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:860px}
+  thead th{background:#f8fafc;text-align:center;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--muted);padding:11px 8px;border-bottom:2px solid var(--line);white-space:nowrap}
+  thead th.l{text-align:left}
+  tbody td{padding:10px 8px;border-bottom:1px solid var(--line2);text-align:center;vertical-align:middle}
+  tbody td.l{text-align:left}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr.top{background:linear-gradient(90deg,rgba(21,163,74,.07),transparent 70%)}
+  tbody tr:hover{background:#f8fafc}
+  .tmodel{font-weight:800;white-space:nowrap}
+  .tmodel small{display:block;color:var(--muted);font-weight:500;font-size:11px}
+  .tusd{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .stars{letter-spacing:1px;font-size:13px;white-space:nowrap}
+  .stars .f{color:#f59e0b} .stars .e{color:#dbe1ea}
+  .tot{font-weight:800;font-variant-numeric:tabular-nums}
+  .ybadge{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px}
+  .ybadge.y{background:var(--greenbg);color:#0f5132} .ybadge.n{background:var(--slatebg);color:var(--soft)}
+  .legend{font-size:12px;color:var(--muted);margin-top:12px;line-height:1.6}
+  .legend b{color:var(--slate)}
+
+  /* CRITERIA */
+  .crit{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
+  .ccard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:var(--shadow)}
+  .ccard h4{font-size:15px;font-weight:800;display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .ccard h4 .e{font-size:18px}
+  .ccard p{font-size:13.5px;color:var(--slate);line-height:1.55}
+  .ccard p b{color:var(--ink)}
+
+  /* MODEL VERDICT CARDS */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+  .mcard{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .mtop{display:flex;gap:14px;padding:15px 16px 0}
+  .mtop .ph{width:120px;height:78px;flex-shrink:0;background:linear-gradient(160deg,#f3f6fa,#e6ecf4);border-radius:10px;display:flex;align-items:center;justify-content:center}
+  .mtop .ph img{width:96%;height:96%;object-fit:contain}
+  .mhead .rk{font-size:11px;font-weight:800;color:var(--muted)}
+  .mhead .model{font-size:17px;font-weight:800;line-height:1.1}
+  .mhead .ver{font-size:12px;color:var(--slate);margin-top:2px}
+  .mhead .usd{font-size:15px;font-weight:800;margin-top:5px}
+  .mspec{display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px 0}
+  .mspec span{font-size:11.5px;font-weight:600;color:var(--slate);background:var(--slatebg);border-radius:7px;padding:4px 9px}
+  .mbody{padding:13px 16px 16px;display:flex;flex-direction:column;gap:10px}
+  .pc{display:flex;flex-direction:column;gap:5px}
+  .pc .row{display:flex;gap:8px;font-size:12.8px;line-height:1.4}
+  .pc .ic{flex-shrink:0;width:16px;height:16px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#fff;margin-top:1px}
+  .pc .ic.p{background:var(--green)} .pc .ic.c{background:var(--red)}
+  .pc .row span:last-child{color:var(--slate)}
+  .mverdict{font-size:13px;line-height:1.5;background:var(--goldbg);border:1px solid var(--amberln);border-radius:10px;padding:10px 12px;color:#854d0e}
+  .mverdict b{color:#7c2d12}
+
+  /* DECISION GUIDE */
+  .guide{display:flex;flex-direction:column;gap:10px}
+  .grow{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;box-shadow:var(--shadow)}
+  .grow .if{flex:1;font-size:14px;color:var(--slate)}
+  .grow .if b{color:var(--ink)}
+  .grow .then{flex-shrink:0;text-align:right}
+  .grow .then .pick{font-weight:800;font-size:14.5px}
+  .grow .then .pu{font-size:12px;color:var(--muted)}
+  .grow .arrow{color:var(--soft);font-weight:800}
+
+  footer{margin-top:36px;padding:26px 0 60px;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line)}
+  footer h3{font-size:13px;color:var(--ink);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+  footer p{margin-bottom:9px;max-width:980px;line-height:1.6}
+  footer a{color:var(--blue);text-decoration:none}
+  @media(max-width:600px){h1{font-size:26px}.wrap{padding:0 14px}.grid,.crit{grid-template-columns:1fr}
+    .grow{flex-direction:column;align-items:flex-start}.grow .then{text-align:left}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="badge-top">Análisis honesto · sin patrocinio · 15 jun 2026</div>
+    <h1>De las 8 que cumplen, <span class="hl">¿cuál te conviene comprar?</span></h1>
+    <p class="lead">Las 8 cumplen lo no negociable: punto ciego + llantas de 17" por menos de USD 29.000. Pero no valen lo mismo. Acá las comparo punto por punto por lo que de verdad pesa en el uso diario y en la reventa, y te digo cuál elegiría yo y por qué.</p>
+
+    <div class="verdict">
+      <div class="vc win">
+        <div class="t">Mejor compra (valor)</div>
+        <div class="m">Chevrolet Tracker LTZ</div>
+        <div class="p">El mejor motor del grupo accesible, SUV-B amplia y fabricada en Argentina. Cumple todo y es la más barata.</div>
+        <div class="u">USD 25.959</div>
+      </div>
+      <div class="vc full">
+        <div class="t">Si lo querés todo (con techo)</div>
+        <div class="m">Chevrolet Tracker Premier</div>
+        <div class="p">Suma techo panorámico, cargador inalámbrico y Easy Park sin perder motor ni espacio. Queda al filo del presupuesto.</div>
+        <div class="u">USD 28.699</div>
+      </div>
+      <div class="vc alt">
+        <div class="t">Mejor alternativa (no Chevrolet)</div>
+        <div class="m">VW Nivus Highline</div>
+        <div class="p">Si preferís VW: andar refinado, buen empuje (200 Nm), baúl grande y estética coupé. Sin techo panorámico.</div>
+        <div class="u">USD 26.199</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section style="padding-top:28px">
+    <div class="tldr">
+      <h3>El veredicto en 20 segundos</h3>
+      <p>Si tuviera que poner la plata: <b>Tracker LTZ</b>. Cumple punto ciego + 17", tiene el motor más completo del lote barato (1.2 turbo 132 CV), es la más espaciosa y, al fabricarse en Argentina, es la más fácil de conseguir, financiar y revender. Y es la más barata de las 8.</p>
+      <p>El único "pero": <b>no trae techo panorámico</b> (vos lo pusiste como deseable, no obligatorio). Si ese techo te importa de verdad, subí a la <b>Tracker Premier</b> o <b>RS</b> (mismo motor + techo), o mirá el <b>Kia K3 Cross</b> (lo trae y cotiza en dólares, pero es un crossover compacto con motor aspirado).</p>
+      <p>Las <b>Tera</b> son las más difíciles de justificar: por casi la misma plata que una Tracker te llevás un auto más chico y con menos motor (101 CV). Las versiones <b>Outfit</b> (Tera y Nivus) y la <b>RS</b> suman estética, no sustancia.</p>
+      <p>¿Y la <b>T-Cross</b>? No entró en las 8 por un solo motivo: <b>se pasa por poco</b> (USD 30.651, ~USD 1.650 sobre tu tope). En equipamiento es el <b>VW más completo</b> (el único con punto ciego + 17" + techo panorámico), pero la <b>Tracker Premier</b> ofrece ese mismo combo por menos plata y con más motor. La analizo aparte, más abajo.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--green)">★</div><div><h2>Mi recomendación</h2><p>No hay una sola respuesta: depende de si el techo panorámico es para vos imprescindible o un lujo.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--green),var(--greenln))"></div>
+    <div class="recs" id="recs"></div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num">≡</div><div><h2>Tabla de puntajes</h2><p>Califiqué cada una de 1 a 5 en los 7 criterios que pesan. El puntaje es una guía, no un dogma: leé también los motivos abajo.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,#cbd5e1,transparent)"></div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr>
+          <th class="l">Modelo</th><th>USD</th>
+          <th>Motor</th><th>Espacio</th><th>Equipo</th><th>Origen</th><th>Reventa</th><th>Posventa</th><th>Valor</th>
+          <th>Techo panor.</th><th>Puntaje</th>
+        </tr></thead>
+        <tbody id="scorebody"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <b>Cómo lo califiqué (honesto):</b> <b>Motor</b> = potencia y empuje reales · <b>Espacio</b> = habitabilidad y baúl · <b>Equipo</b> = lo que suma por encima de lo que pediste · <b>Origen</b> = nacional (mejor disponibilidad/repuestos) vs importado · <b>Reventa</b> = liquidez y valor de reventa en Argentina · <b>Posventa</b> = red de service + garantía · <b>Valor</b> = cuánto auto dan por la plata. El techo panorámico es un extra deseable, no entra al puntaje (lo marco aparte).
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--accent)">7</div><div><h2>Los 7 criterios que importan de verdad</h2><p>Punto por punto, qué cambia entre ellas más allá del precio de vidriera.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--accent),#ddd6fe)"></div>
+    <div class="crit">
+      <div class="ccard"><h4><span class="e">⚙️</span> Motor y andar</h4><p>La <b>Tracker</b> usa un <b>1.2 turbo de 132 CV (190 Nm)</b>: el más completo del grupo accesible. El <b>Nivus</b> monta el <b>1.0 turbo de 116 CV pero 200 Nm</b>, con muy buen empuje en ciudad. La <b>Tera</b> rinde <b>101 CV (170 Nm)</b>: alcanza, pero es la más justa. El <b>K3 Cross</b> trae un <b>1.6 aspirado</b>: anda bien en ciudad, pero sin la fuerza de los turbo en ruta o subidas con carga.</p></div>
+      <div class="ccard"><h4><span class="e">📦</span> Espacio y habitabilidad</h4><p>La <b>Tracker</b> es la SUV-B más "plena" y la más cómoda atrás. El <b>Nivus</b> tiene <b>baúl grande (~415 l)</b>, pero el techo coupé recorta algo de cabeza en las plazas traseras. La <b>Tera</b> es la más compacta (4,15 m, baúl 350 l). El <b>K3 Cross</b> es un crossover compacto, más bajo y chico que una SUV de verdad.</p></div>
+      <div class="ccard"><h4><span class="e">🏭</span> Origen y disponibilidad</h4><p>La <b>Tracker se fabrica en Argentina</b>: mejor disponibilidad de unidades, repuestos y, muchas veces, mejores planes de financiación. <b>Nivus y Tera</b> vienen de Brasil y el <b>K3</b> de México: en importados los tiempos de entrega y de repuestos pueden estirarse.</p></div>
+      <div class="ccard"><h4><span class="e">💸</span> Reventa</h4><p>La <b>Tracker</b> (la SUV-B más vendida) y <b>VW</b> tienen mercado líquido y buena reventa. La <b>Tera</b> es modelo nuevo: su reventa todavía está por verse. <b>Kia</b> suele tener reventa más floja en Argentina por menor volumen.</p></div>
+      <div class="ccard"><h4><span class="e">🔧</span> Posventa y garantía</h4><p><b>Chevrolet y VW</b> tienen redes de service enormes en todo el país. <b>Kia</b> tiene red más chica, pero lo compensa con una <b>garantía más larga (5 años)</b>. Las tres marcas alemana/americana rondan los 3 años.</p></div>
+      <div class="ccard"><h4><span class="e">🌅</span> Techo panorámico (lo deseable)</h4><p>Solo lo ofrecen <b>Tracker RS</b>, <b>Tracker Premier</b> y <b>K3 Cross GT-Line</b>. <b>Nivus y Tera no lo tienen</b> en ninguna versión. Como lo pediste como "deseable", no descarta a nadie, pero sí inclina la balanza si te importa.</p></div>
+      <div class="ccard"><h4><span class="e">⚖️</span> Precio y valor</h4><p>La <b>Tracker LTZ</b> y la <b>Nivus Highline</b> son las que más auto dan por menos plata. Las versiones <b>Outfit</b> (y la RS) suman estética, no sustancia. La <b>Tera</b> pide casi lo mismo que una Tracker más grande, y el <b>K3</b> es de los más caros del tope siendo el más compacto.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--blue)">★</div><div><h2>Una por una: lo bueno y lo malo</h2><p>Pros y contras honestos, en orden de recomendación.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--blue),var(--bluebg))"></div>
+    <div class="grid" id="models"></div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--amber)">!</div><div><h2>Mención aparte: la VW T-Cross</h2><p>No está en el Top 8 por una sola razón: el precio. En equipamiento, cumple todo.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,var(--amber),var(--amberln))"></div>
+    <div class="tldr" style="border-left-color:var(--amber)">
+      <p style="margin-bottom:0">La <b>T-Cross Highline</b> cumple <b>todo</b> lo que pediste y, de hecho, es el <b>único VW que junta los tres</b>: punto ciego, llantas de 17" y <b>techo solar panorámico</b>. Quedó fuera del Top 8 por un único motivo: cuesta <b>USD 30.651</b>, o sea <b>~USD 1.650 por encima de tu tope</b> de USD 29.000. No es un problema de equipamiento, es de presupuesto. (La <b>Extreme</b>, más deportiva, ofrece lo mismo por USD 31.336.)</p>
+    </div>
+    <div class="grid" id="tcrossCard" style="margin-top:18px;max-width:560px"></div>
+  </section>
+
+  <section>
+    <div class="shead"><div class="num" style="background:var(--ink)">→</div><div><h2>Guía rápida: cuál comprar según tu caso</h2><p>Elegí la fila que más se parezca a vos.</p></div></div>
+    <div class="sban" style="background:linear-gradient(90deg,#0f172a,#cbd5e1)"></div>
+    <div class="guide">
+      <div class="grow"><div class="if">Querés la <b>mejor relación auto/plata</b> y el techo panorámico no es prioridad.</div><div class="arrow">→</div><div class="then"><div class="pick">Tracker LTZ</div><div class="pu">USD 25.959</div></div></div>
+      <div class="grow"><div class="if">Querés <b>todo, incluido el techo panorámico</b>, sin pasarte del presupuesto.</div><div class="arrow">→</div><div class="then"><div class="pick">Tracker Premier</div><div class="pu">USD 28.699</div></div></div>
+      <div class="grow"><div class="if">Te gusta lo <b>deportivo</b> y querés el equipo de la Premier con onda y un poco menos de plata.</div><div class="arrow">→</div><div class="then"><div class="pick">Tracker RS</div><div class="pu">USD 28.425</div></div></div>
+      <div class="grow"><div class="if">Preferís <b>VW</b>: andar refinado, buen empuje y estética coupé (sin techo panorámico).</div><div class="arrow">→</div><div class="then"><div class="pick">VW Nivus Highline</div><div class="pu">USD 26.199</div></div></div>
+      <div class="grow"><div class="if">Querés <b>precio fijo en dólares</b> + garantía larga + techo, y te alcanza un crossover compacto.</div><div class="arrow">→</div><div class="then"><div class="pick">Kia K3 Cross GT-Line</div><div class="pu">USD 28.650</div></div></div>
+      <div class="grow"><div class="if">Buscás el <b>diseño VW más nuevo</b> en formato chico y no te importa el menor motor.</div><div class="arrow">→</div><div class="then"><div class="pick">VW Tera High</div><div class="pu">USD 27.055</div></div></div>
+      <div class="grow"><div class="if">Querés un <b>VW con techo panorámico sí o sí</b> y podés <b>estirar el presupuesto</b> ~USD 1.650.</div><div class="arrow">→</div><div class="then"><div class="pick">VW T-Cross Highline</div><div class="pu">USD 30.651 · se pasa</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap" style="padding:0">
+      <h3>Cómo armé este análisis (y qué es opinión)</h3>
+      <p><b>Datos duros:</b> precios de <a href="https://elcerokm.com" target="_blank">elcerokm.com</a> (junio 2026) al dólar blue venta <b>$1.460</b>; equipamiento de las <b>fichas técnicas oficiales</b> (flyers VW MY26 y datos oficiales de Chevrolet). El Kia K3 Cross cotiza directamente en dólares (US$ 28.650).</p>
+      <p><b>Lo que es juicio mío:</b> los puntajes de 1 a 5 y el orden de recomendación son una valoración basada en specs, segmento y comportamiento del mercado argentino (reventa, red, producción nacional). No es un ranking patrocinado ni una verdad absoluta: alguien que priorice diseño o marca puede ordenar distinto.</p>
+      <p style="color:var(--soft)">Antes de cerrar: el "mejor precio" de elcerokm puede requerir contado o financiación puntual, y los valores de 0km se mueven seguido. Confirmá precio final, disponibilidad y equipamiento exacto de la unidad en el concesionario. Si el techo panorámico es clave, pedí verlo en la ficha de la unidad concreta.</p>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+const RATE=1460;
+// score 1-5 en: motor, espacio, equip, origen, reventa, posventa, valor
+const cars=[
+  {erank:1, brand:"Chevrolet", model:"Tracker", ver:"LTZ · 1.2 turbo 132 CV AT6", img:"tracker",
+   usd:25959, ars:37900000, origin:"Nacional (Argentina)", pano:false,
+   spec:["1.2T · 132 CV","190 Nm","SUV-B · baúl ~390 l","Nacional"],
+   s:{motor:5,espacio:5,equip:3,origen:5,reventa:4,posventa:4,valor:5},
+   pros:["El mejor motor del grupo accesible (1.2T, 132 CV)","SUV-B amplia y cómoda atrás","Fabricada en Argentina: entrega, repuestos y financiación","Punto ciego, frenado autónomo y 6 airbags","La más barata de las 8"],
+   cons:["Sin techo panorámico (arranca en la Premier)","Sin cargador inalámbrico","Llantas de 17 pulgadas, sin pretensiones"],
+   verdict:"La compra inteligente. Cumple todo lo que pediste y te deja ~USD 2.700 en el bolsillo frente a la Premier."},
+
+  {erank:2, brand:"Chevrolet", model:"Tracker", ver:"Premier · 1.2 turbo 132 CV AT6", img:"tracker",
+   usd:28699, ars:41900000, origin:"Nacional (Argentina)", pano:true,
+   spec:["1.2T · 132 CV","190 Nm","Techo panorámico","Nacional"],
+   s:{motor:5,espacio:5,equip:5,origen:5,reventa:4,posventa:4,valor:4},
+   pros:["La más completa que entra: techo panorámico + cargador inalámbrico + Easy Park","Mismo motor y espacio que el resto de las Tracker","Punto ciego y 17 pulgadas oscurecidas","Producción nacional"],
+   cons:["Queda al filo del presupuesto (USD 28.699)","El salto de equipo sobre la LTZ se paga ~USD 2.700"],
+   verdict:"Si querés todo, incluido el techo panorámico, sin pasarte del tope, es esta."},
+
+  {erank:3, brand:"Volkswagen", model:"Nivus", ver:"Highline · 1.0 turbo 116 CV AT6", img:"nivus",
+   usd:26199, ars:38250000, origin:"Importada (Brasil)", pano:false,
+   spec:["1.0T · 116 CV","200 Nm","Baúl ~415 l","Importada"],
+   s:{motor:4,espacio:4,equip:4,origen:3,reventa:4,posventa:4,valor:5},
+   pros:["Andar e interior VW, refinados","Buen empuje: 200 Nm, ideal ciudad","Baúl grande para el segmento (~415 l)","Punto ciego + 17 pulgadas, y precio bajo","Buena reventa de la marca"],
+   cons:["Importada de Brasil (entrega/repuestos)","Techo coupé: algo menos de cabeza atrás","Sin techo panorámico"],
+   verdict:"La mejor alternativa si preferís VW y te gusta la estética coupé. Casi tan barata como la Tracker LTZ."},
+
+  {erank:4, brand:"Chevrolet", model:"Tracker", ver:"RS · 1.2 turbo 132 CV AT6", img:"tracker",
+   usd:28425, ars:41500000, origin:"Nacional (Argentina)", pano:true,
+   spec:["1.2T · 132 CV","190 Nm","Techo panorámico","Estética RS"],
+   s:{motor:5,espacio:5,equip:4,origen:5,reventa:4,posventa:4,valor:4},
+   pros:["Equipo de la Premier + estética deportiva RS","Trae techo panorámico","~USD 270 más barata que la Premier","Mismo motor y producción nacional"],
+   cons:["Confirmá que la unidad incluya el techo","La estética RS no es para todos","A nivel mecánico no aporta nada sobre la LTZ"],
+   verdict:"Premier con onda deportiva por un poco menos. Buena si te gusta el look."},
+
+  {erank:5, brand:"Volkswagen", model:"Nivus", ver:"Outfit · 1.0 turbo 116 CV AT6", img:"nivus",
+   usd:27405, ars:40010952, origin:"Importada (Brasil)", pano:false,
+   spec:["1.0T · 116 CV","200 Nm","Tope de gama","Importada"],
+   s:{motor:4,espacio:4,equip:4,origen:3,reventa:4,posventa:4,valor:4},
+   pros:["Tope de gama Nivus (base Highline)","17 pulgadas oscurecidas y detalles negros","Mismo punto ciego y motor que la Highline"],
+   cons:["~USD 1.200 más que la Highline solo por estética","Sin techo panorámico","Importada"],
+   verdict:"Solo si te enamora el look. En sustancia, la Highline ofrece lo mismo por menos."},
+
+  {erank:6, brand:"Kia", model:"K3 Cross", ver:"GT-Line · 1.6 aspirado AT", img:"k3",
+   usd:28650, ars:null, origin:"Importada (México) · cotiza en USD", pano:true,
+   spec:["1.6 aspirado · ~121 CV","Crossover compacto","Techo panorámico","Garantía 5 años"],
+   s:{motor:3,espacio:3,equip:4,origen:3,reventa:3,posventa:4,valor:3},
+   pros:["Precio en dólares: no se mueve con el blue","Garantía Kia larga (5 años)","Trae techo panorámico","Punto ciego + 17 pulgadas y equipo GT-Line completo"],
+   cons:["Es un crossover compacto, no una SUV plena","Motor 1.6 aspirado: menos empuje que los turbo","Red de posventa y reventa más chicas","Importado de México"],
+   verdict:"Tiene sentido si valorás el precio estable en dólares, la garantía y el techo, y no necesitás una SUV grande."},
+
+  {erank:7, brand:"Volkswagen", model:"Tera", ver:"High · 1.0 turbo 101 CV AT6", img:"tera",
+   usd:27055, ars:39499999, origin:"Importada (Brasil)", pano:false,
+   spec:["1.0T · 101 CV","170 Nm","SUV chica · 4,15 m · baúl 350 l","Importada"],
+   s:{motor:3,espacio:3,equip:3,origen:3,reventa:3,posventa:4,valor:3},
+   pros:["El VW más nuevo, diseño fresco","Punto ciego, crucero adaptativo y 17 pulgadas","Buena tecnología para su tamaño"],
+   cons:["La más chica (4,15 m) y la menos potente (101 CV)","Sin techo panorámico","A USD 27k pagás casi lo de una Tracker más grande"],
+   verdict:"Elegila por diseño y formato compacto, no por relación tamaño/precio."},
+
+  {erank:8, brand:"Volkswagen", model:"Tera", ver:"Outfit · 1.0 turbo 101 CV AT6", img:"tera",
+   usd:27329, ars:39900000, origin:"Importada (Brasil)", pano:false,
+   spec:["1.0T · 101 CV","170 Nm","17 pulgadas oscurecidas","Importada"],
+   s:{motor:3,espacio:3,equip:4,origen:3,reventa:3,posventa:4,valor:3},
+   pros:["Tera con terminación Outfit y 17 pulgadas oscurecidas","Punto ciego y crucero adaptativo de serie"],
+   cons:["~USD 270 más que la High por pura estética","Mismas limitaciones: chica, 101 CV, sin techo"],
+   verdict:"La más difícil de justificar del top por relación precio/sustancia."}
+];
+
+// Fuera del Top 8: cumple todo el equipamiento pero se pasa del presupuesto
+const tcross={
+  rankLabel:"Fuera del Top 8 · solo por precio", brand:"Volkswagen", model:"T-Cross", ver:"Highline · 1.0 turbo 116 CV AT6", img:"tcross",
+  usd:30651, ars:44750000, origin:"Importada (Brasil)", pano:true,
+  spec:["1.0T · 116 CV","200 Nm","SUV-B · asiento trasero corredizo","Se pasa +USD 1.651"],
+  s:{motor:4,espacio:5,equip:5,origen:3,reventa:4,posventa:4,valor:3},
+  pros:["El único VW que junta punto ciego + 17 pulgadas + techo solar panorámico","Motor 1.0T con buen empuje (200 Nm) y caja AT6","SUV-B práctica: más espacio y altura que Nivus/Tera, con asiento trasero corredizo","Interior y andar VW, con buena reventa"],
+  cons:["Se pasa de tu tope: USD 30.651 (~USD 1.650 de más)","La Tracker Premier (USD 28.699) da el mismo combo con más motor (132 CV) y es nacional","Importada de Brasil"],
+  verdict:"Es el VW más completo para lo que pediste y quedó afuera del Top 8 por un solo motivo: el precio. Si podés estirar ~USD 1.650 y querés sí o sí un VW con techo panorámico, es la mejor opción de la marca. Si no, la Tracker Premier hace lo mismo por menos y con mejor motor."
+};
+
+const IMG={
+  tracker:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=chevrolet&modelFamily=tracker&modelRange=tracker&modelYear=2026&trim=premier&angle=01",
+  nivus:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=nivus&modelRange=nivus&modelYear=2025&trim=highline&angle=01",
+  tera:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=tera&modelRange=tera&modelYear=2026&trim=outfit&angle=01",
+  k3:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=kia&modelFamily=k3&modelVariant=ha&modelYear=2026&angle=01",
+  tcross:"https://cdn.imagin.studio/getImage?customer=arelcerokm&countryCode=AR&zoomLevel=30&width=800&make=volkswagen&modelFamily=t-cross&modelRange=t-cross&modelYear=2025&trim=highline&angle=01"
+};
+const fmtArs=n=>"$"+n.toLocaleString("es-AR");
+const fmtUsd=n=>"USD "+n.toLocaleString("es-AR");
+const totOf=c=>Object.values(c.s).reduce((a,b)=>a+b,0);
+const stars=n=>{let h="";for(let i=1;i<=5;i++)h+=`<span class="${i<=n?'f':'e'}">●</span>`;return `<span class="stars">${h}</span>`;};
+const priceArs=c=>c.ars?fmtArs(c.ars):"cotiza en dólares";
+
+// RECOMMENDATION CARDS
+const recDefs=[
+  {erank:1, cls:"primary", lab:"① Mejor compra"},
+  {erank:2, cls:"full", lab:"② Si lo querés todo"},
+  {erank:3, cls:"alt", lab:"③ Mejor alternativa"}
+];
+const recsEl=document.getElementById("recs");
+recDefs.forEach(d=>{
+  const c=cars.find(x=>x.erank===d.erank);
+  const el=document.createElement("div"); el.className="rec "+d.cls;
+  el.innerHTML=`
+    <span class="lab">${d.lab}</span>
+    <div class="ph"><img src="${IMG[c.img]}" alt="${c.brand} ${c.model}" loading="lazy"></div>
+    <div class="rbody">
+      <div><div class="brand">${c.brand}</div><div class="model">${c.model}</div><div class="ver">${c.ver}</div></div>
+      <div class="rprice"><div class="usd">${fmtUsd(c.usd)}</div><div class="ars">${priceArs(c)}<br>${c.pano?'con techo panor.':'sin techo panor.'}</div></div>
+      <div class="rwhy">${c.verdict}</div>
+    </div>`;
+  recsEl.appendChild(el);
+});
+
+// SCORE TABLE (sorted by total desc, tie -> editorial rank)
+const sb=document.getElementById("scorebody");
+[...cars].sort((a,b)=>(totOf(b)-totOf(a))||(a.erank-b.erank)).forEach((c,i)=>{
+  const tr=document.createElement("tr"); if(i<3) tr.className="top";
+  tr.innerHTML=`
+    <td class="l"><div class="tmodel">${c.brand} ${c.model}<small>${c.ver.split(' · ')[0]}</small></div></td>
+    <td class="tusd">${c.usd.toLocaleString("es-AR")}</td>
+    <td>${stars(c.s.motor)}</td><td>${stars(c.s.espacio)}</td><td>${stars(c.s.equip)}</td>
+    <td>${stars(c.s.origen)}</td><td>${stars(c.s.reventa)}</td><td>${stars(c.s.posventa)}</td><td>${stars(c.s.valor)}</td>
+    <td><span class="ybadge ${c.pano?'y':'n'}">${c.pano?'Sí':'No'}</span></td>
+    <td class="tot">${totOf(c)}<span style="color:var(--soft);font-weight:600">/35</span></td>`;
+  sb.appendChild(tr);
+});
+
+// MODEL VERDICT CARDS (editorial order)
+function modelCard(c){
+  const el=document.createElement("div"); el.className="mcard";
+  el.innerHTML=`
+    <div class="mtop">
+      <div class="ph"><img src="${IMG[c.img]}" alt="${c.brand} ${c.model}" loading="lazy"></div>
+      <div class="mhead">
+        <div class="rk">${c.rankLabel || ('#'+c.erank+' en mi ranking')}</div>
+        <div class="model">${c.brand} ${c.model}</div>
+        <div class="ver">${c.ver}</div>
+        <div class="usd">${fmtUsd(c.usd)} <span style="font-weight:600;color:var(--muted);font-size:12px">· ${c.origin}</span></div>
+      </div>
+    </div>
+    <div class="mspec">${c.spec.map(s=>`<span>${s}</span>`).join("")}</div>
+    <div class="mbody">
+      <div class="pc">
+        ${c.pros.map(p=>`<div class="row"><span class="ic p">✓</span><span>${p}</span></div>`).join("")}
+        ${c.cons.map(p=>`<div class="row"><span class="ic c">✗</span><span>${p}</span></div>`).join("")}
+      </div>
+      <div class="mverdict"><b>Mi veredicto:</b> ${c.verdict}</div>
+    </div>`;
+  return el;
+}
+const mc=document.getElementById("models");
+cars.forEach(c=>mc.appendChild(modelCard(c)));
+const tcc=document.getElementById("tcrossCard");
+if(tcc) tcc.appendChild(modelCard(tcross));
+</script>
+</body>
+</html>
